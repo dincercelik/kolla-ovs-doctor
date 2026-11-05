@@ -1,0 +1,10 @@
+#!/bin/bash
+if [ "$1 $2" = "netns list" ]; then echo "qrouter-r1 (id: 0)"; echo "snat-r1 (id: 1)"; exit; fi
+if [ "$1 $2" = "netns exec" ]; then shift 3; exec "$@"; fi
+if [ "$1" = -n ]; then ns=$2; shift 2
+  case "$*" in
+    *addr*) echo "2: qg-1    inet 203.0.113.5/24 brd 203.0.113.255 scope global qg-1" ;;
+    *neigh*) echo "10.0.0.9 dev qr-1 lladdr fa:16:3e:aa:bb:cc PERMANENT" ;;
+    *route*) echo "default via 203.0.113.1 dev qg-1" ;;
+  esac
+fi

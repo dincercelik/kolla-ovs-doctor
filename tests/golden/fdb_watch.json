@@ -1,0 +1,1502 @@
+{
+ "0": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "1": [
+  1,
+  "port fa:16:3e:00:00:09 fd00::5 on c2, vni 100, port age 0s\nc1       unicast  seen at 0s\nc3       unicast  seen at 0s\nc1       flood    seen at 15s\nnet1     unicast  seen at 15s\nport moved from c2 to c3 at 30s. Timing starts again.\nowner c3\nhost     arp      flood    unicast\nc1       n/a      never    never\nc2       n/a      never    never\nnet1     n/a      never    never\n",
+  ""
+ ],
+ "10": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       unicast  seen at 0s\nc3       unicast  seen at 0s\nc3       arp      seen at 15s\nnet1     flood    seen at 15s\nc2       flood    seen at 30s\nc3       flood    seen at 30s\nc2       arp      seen at 45s\nnet1     arp      seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       45s      30s      0s\nc3       15s      30s      0s\nnet1     45s      15s      never\n",
+  ""
+ ],
+ "100": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 0s\nc3       arp      seen at 15s\nc3       unicast  seen at 15s\nnet1     flood    seen at 15s\nnet1     unicast  seen at 15s\nc3       flood    seen at 30s\nnet1     arp      seen at 30s\nowner c2\nhost     arp      flood    unicast\nc3       15s      30s      15s\nnet1     30s      15s      15s\n",
+  "c1       ERROR preflight: no sudo\n"
+ ],
+ "101": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 fd00::5 on c2, vni 100, from ACTIVE\nport moved from c2 to c3 at 0s. Timing starts again.\nowner c3\nhost     arp      flood    unicast\nc1       n/a      never    never\nc2       n/a      never    never\nnet1     n/a      never    never\n",
+  ""
+ ],
+ "102": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\n",
+  "ERROR port owner c2 failed the preflight check: no sudo\n"
+ ],
+ "103": [
+  1,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nc2       arp      seen at 0s\nc2       unicast  seen at 0s\nc3       arp      seen at 0s\nc3       flood    seen at 0s\nc2       flood    seen at 15s\nowner net1\nhost     arp      flood    unicast\nc2       0s       15s      0s\nc3       0s       0s       never\n",
+  ""
+ ],
+ "104": [
+  1,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, from ACTIVE\nc2       arp      seen at 0s\nc2       flood    seen at 0s\nc2       unicast  seen at 0s\nc3       arp      seen at 0s\nc3       flood    seen at 0s\nc3       unicast  seen at 0s\nnet1     arp      seen at 0s\nnet1     unicast  seen at 0s\nport moved from c1 to c2 at 45s. Timing starts again.\nc1       arp      seen at 0s\nc3       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c2\nhost     arp      flood    unicast\nc1       0s       never    never\nc3       0s       never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "105": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nc2       unicast  seen at 5s\nc1       flood    seen at 20s\nc2       arp      seen at 20s\nc2       flood    seen at 20s\nc1       arp      seen at 35s\nc1       unicast  seen at 35s\nnet1     arp      seen at 50s\nnet1     unicast  seen at 50s\nowner c3\nhost     arp      flood    unicast\nc1       35s      20s      35s\nc2       20s      20s      5s\nnet1     50s      never    50s\n",
+  ""
+ ],
+ "106": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc1       arp      seen at 20s\nc3       arp      seen at 20s\nc1       unicast  seen at 35s\nc2       unicast  seen at 35s\nc3       unicast  seen at 35s\nc1       flood    seen at 50s\nc2       arp      seen at 50s\nc2       flood    seen at 50s\nc3       flood    seen at 50s\nowner net1\nhost     arp      flood    unicast\nc1       20s      50s      35s\nc2       50s      50s      35s\nc3       20s      50s      35s\n",
+  ""
+ ],
+ "107": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "108": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\nc1       arp      seen at 0s\nc1       unicast  seen at 0s\nnet1     arp      seen at 0s\nc1       flood    seen at 15s\nnet1     unicast  seen at 30s\nport moved from c2 to c3 at 60s. Timing starts again.\nc1       arp      seen at 0s\nc2       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c3\nhost     arp      flood    unicast\nc1       0s       never    never\nc2       0s       never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "109": [
+  1,
+  "port fa:16:3e:00:00:09 fd00::5 on c3, vni 100, port age 5s\nc2       flood    seen at 20s\nnet1     flood    seen at 35s\nc2       unicast  seen at 50s\nowner c3\nhost     arp      flood    unicast\nc2       n/a      20s      50s\nnet1     n/a      35s      never\n",
+  ""
+ ],
+ "11": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "110": [
+  2,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nc3       flood    seen at 0s\nc3       unicast  seen at 0s\nport moved from net1 to c1 at 45s. Timing starts again.\nnet1     arp      seen at 0s\nowner c1\nhost     arp      flood    unicast\nc3       never    never    never\nnet1     0s       never    never\n",
+  "c1       ERROR preflight: no sudo\n"
+ ],
+ "111": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\n",
+  "ERROR port owner c2 failed the preflight check: no sudo\n"
+ ],
+ "112": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "113": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, from ACTIVE\nc2       arp      seen at 0s\nc2       flood    seen at 0s\nnet1     arp      seen at 0s\nnet1     flood    seen at 0s\nnet1     unicast  seen at 0s\nowner c1\nhost     arp      flood    unicast\nc2       0s       0s       never\nnet1     0s       0s       0s\n",
+  ""
+ ],
+ "114": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nnet1     arp      seen at 5s\nnet1     flood    seen at 5s\nnet1     unicast  seen at 50s\nowner c2\nhost     arp      flood    unicast\nc1       n/a      never    never\nnet1     5s       5s       50s\n",
+  ""
+ ],
+ "115": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc2       arp      seen at 0s\nc1       arp      seen at 30s\nc1       flood    seen at 30s\nc1       unicast  seen at 45s\nowner c3\nhost     arp      flood    unicast\nc1       30s      30s      45s\nc2       0s       never    never\n",
+  ""
+ ],
+ "116": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nc2       unicast  seen at 5s\nc1       arp      seen at 35s\nnet1     flood    seen at 35s\nc1       flood    seen at 50s\nc2       arp      seen at 50s\nnet1     unicast  seen at 50s\nowner c3\nhost     arp      flood    unicast\nc1       35s      50s      never\nc2       50s      never    5s\nnet1     never    35s      50s\n",
+  ""
+ ],
+ "117": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 0s\nc1       arp      seen at 0s\nc3       arp      seen at 0s\nnet1     flood    seen at 0s\nc3       flood    seen at 15s\nnet1     unicast  seen at 15s\nc3       unicast  seen at 30s\nnet1     arp      seen at 45s\nowner c2\nhost     arp      flood    unicast\nc1       0s       never    never\nc3       0s       15s      30s\nnet1     45s      0s       15s\n",
+  ""
+ ],
+ "118": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc3       unicast  seen at 20s\nport moved from c2 to c3 at 35s. Timing starts again.\nowner c3\nhost     arp      flood    unicast\nc2       never    never    never\n",
+  ""
+ ],
+ "119": [
+  2,
+  "port fa:16:3e:00:00:09 fd00::5 on c3, vni 100, port age 0s\nnet1     flood    seen at 0s\nc1       flood    seen at 30s\nc1       unicast  seen at 30s\nnet1     unicast  seen at 30s\nowner c3\nhost     arp      flood    unicast\nc1       n/a      30s      30s\nnet1     n/a      0s       30s\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "12": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc2       unicast  seen at 5s\nc2       arp      seen at 20s\nc3       flood    seen at 20s\nc3       unicast  seen at 50s\nowner net1\nhost     arp      flood    unicast\nc2       20s      never    5s\nc3       never    20s      50s\n",
+  ""
+ ],
+ "120": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc3       flood    seen at 20s\nnet1     unicast  seen at 20s\nc1       arp      seen at 35s\nc1       flood    seen at 35s\nc1       unicast  seen at 35s\nc3       arp      seen at 35s\nc3       unicast  seen at 35s\nnet1     arp      seen at 35s\nnet1     flood    seen at 35s\nowner c2\nhost     arp      flood    unicast\nc1       35s      35s      35s\nc3       35s      20s      35s\nnet1     35s      35s      20s\n",
+  ""
+ ],
+ "121": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 5s\nc2       flood    seen at 5s\nc3       unicast  seen at 5s\nc3       flood    seen at 20s\nnet1     unicast  seen at 35s\nc2       arp      seen at 50s\nc3       arp      seen at 50s\nnet1     arp      seen at 50s\nnet1     flood    seen at 50s\nowner c1\nhost     arp      flood    unicast\nc2       50s      5s       never\nc3       50s      20s      5s\nnet1     50s      50s      35s\n",
+  ""
+ ],
+ "122": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc1       unicast  seen at 5s\nc1       flood    seen at 20s\nc3       flood    seen at 50s\nc3       unicast  seen at 50s\nowner c2\nhost     arp      flood    unicast\nc1       never    20s      5s\nc3       never    50s      50s\n",
+  ""
+ ],
+ "123": [
+  1,
+  "port fa:16:3e:00:00:09 fd00::5 on c1, vni 100, port age 5s\nc2       flood    seen at 5s\nc2       unicast  seen at 20s\nnet1     flood    seen at 20s\nnet1     unicast  seen at 20s\nport moved from c1 to c2 at 35s. Timing starts again.\nowner c2\nhost     arp      flood    unicast\nc1       n/a      never    never\nc3       n/a      never    never\nnet1     n/a      never    never\n",
+  ""
+ ],
+ "124": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nc2       unicast  seen at 5s\nnet1     flood    seen at 5s\nc1       flood    seen at 20s\nnet1     unicast  seen at 20s\nc1       arp      seen at 35s\nc2       arp      seen at 35s\nc1       unicast  seen at 50s\nc2       flood    seen at 50s\nnet1     arp      seen at 50s\nowner c3\nhost     arp      flood    unicast\nc1       35s      20s      50s\nc2       35s      50s      5s\nnet1     50s      5s       20s\n",
+  ""
+ ],
+ "125": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 0s\nowner c2\nhost     arp      flood    unicast\n",
+  ""
+ ],
+ "126": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       flood    seen at 0s\nc3       flood    seen at 15s\nnet1     arp      seen at 15s\nc2       unicast  seen at 30s\nc3       unicast  seen at 30s\nc2       arp      seen at 45s\nnet1     flood    seen at 45s\nnet1     unicast  seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       45s      0s       30s\nc3       never    15s      30s\nnet1     15s      45s      45s\n",
+  ""
+ ],
+ "127": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 fd00::5 on c1, vni 100, from ACTIVE\nc2       flood    seen at 0s\nc3       unicast  seen at 0s\nnet1     flood    seen at 0s\nnet1     unicast  seen at 0s\nc2       unicast  seen at 15s\nowner c1\nhost     arp      flood    unicast\nc2       n/a      0s       15s\nc3       n/a      never    0s\nnet1     n/a      0s       0s\n",
+  ""
+ ],
+ "128": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 0s\nc3       arp      seen at 0s\nc3       flood    seen at 0s\nnet1     flood    seen at 0s\nc3       unicast  seen at 30s\nnet1     arp      seen at 30s\nnet1     unicast  seen at 45s\nowner c2\nhost     arp      flood    unicast\nc3       0s       0s       30s\nnet1     30s      0s       45s\n",
+  ""
+ ],
+ "129": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nnet1     unicast  seen at 5s\nc1       flood    seen at 20s\nc1       unicast  seen at 20s\nc2       unicast  seen at 20s\nnet1     flood    seen at 20s\nc2       arp      seen at 35s\nnet1     arp      seen at 50s\nowner c3\nhost     arp      flood    unicast\nc1       n/a      20s      20s\nc2       35s      never    20s\nnet1     50s      20s      5s\n",
+  ""
+ ],
+ "13": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nc1       flood    seen at 5s\nnet1     arp      seen at 5s\nc1       arp      seen at 20s\nnet1     unicast  seen at 20s\nnet1     flood    seen at 35s\nowner c3\nhost     arp      flood    unicast\nc1       20s      5s       never\nnet1     5s       35s      20s\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "130": [
+  2,
+  "port fa:16:3e:00:00:09 fd00::5 on net1, vni 100, port age 5s\nc2       unicast  seen at 20s\nc1       flood    seen at 35s\nowner net1\nhost     arp      flood    unicast\nc1       n/a      35s      never\nc2       n/a      never    20s\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "131": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc2       arp      seen at 0s\nc2       flood    seen at 15s\nc2       unicast  seen at 15s\nnet1     arp      seen at 15s\nnet1     flood    seen at 15s\nc1       arp      seen at 30s\nowner c3\nhost     arp      flood    unicast\nc1       30s      never    never\nc2       0s       15s      15s\nnet1     15s      15s      never\n",
+  ""
+ ],
+ "132": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc1       flood    seen at 5s\nc1       unicast  seen at 20s\nc3       flood    seen at 20s\nc3       arp      seen at 50s\nowner net1\nhost     arp      flood    unicast\nc1       n/a      5s       20s\nc3       50s      20s      never\n",
+  ""
+ ],
+ "133": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nport moved from net1 to c1 at 35s. Timing starts again.\nnet1     arp      seen at 0s\nowner c1\nhost     arp      flood    unicast\nnet1     0s       never    never\n",
+  "c1       ERROR preflight: no sudo\n"
+ ],
+ "134": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc3       flood    seen at 0s\nc3       unicast  seen at 0s\nc1       flood    seen at 15s\nc2       arp      seen at 15s\nc1       arp      seen at 45s\nc1       unicast  seen at 45s\nc3       arp      seen at 45s\nowner net1\nhost     arp      flood    unicast\nc1       45s      15s      45s\nc2       15s      never    never\nc3       45s      0s       0s\n",
+  ""
+ ],
+ "135": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, from ACTIVE\nport moved from c3 to net1 at 0s. Timing starts again.\nc1       arp      seen at 0s\nc3       arp      seen at 0s\nowner net1\nhost     arp      flood    unicast\nc1       0s       never    never\nc3       0s       never    never\n",
+  ""
+ ],
+ "136": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc1       unicast  seen at 5s\nc3       arp      seen at 5s\nc1       arp      seen at 20s\nc3       flood    seen at 20s\nc3       unicast  seen at 20s\nc1       flood    seen at 50s\nowner net1\nhost     arp      flood    unicast\nc1       20s      50s      5s\nc3       5s       20s      20s\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "137": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nnet1     unicast  seen at 0s\nc3       arp      seen at 15s\nnet1     flood    seen at 30s\nc2       arp      seen at 45s\nc2       unicast  seen at 45s\nc3       flood    seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       45s      never    45s\nc3       15s      45s      never\nnet1     never    30s      0s\n",
+  ""
+ ],
+ "138": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc3       arp      seen at 5s\nc1       arp      seen at 20s\nc1       flood    seen at 20s\nc1       unicast  seen at 50s\nc3       flood    seen at 50s\nowner c2\nhost     arp      flood    unicast\nc1       20s      20s      50s\nc3       5s       50s      never\n",
+  ""
+ ],
+ "139": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "14": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, from ACTIVE\n",
+  "ERROR port owner c1 failed the preflight check: no sudo\n"
+ ],
+ "140": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       unicast  seen at 0s\nc3       arp      seen at 15s\nc3       flood    seen at 15s\nnet1     arp      seen at 15s\nc2       flood    seen at 30s\nc2       arp      seen at 45s\nnet1     flood    seen at 45s\nnet1     unicast  seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       45s      30s      0s\nc3       15s      15s      never\nnet1     15s      45s      45s\n",
+  ""
+ ],
+ "141": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 5s\nc2       unicast  seen at 20s\nc2       arp      seen at 35s\nc3       arp      seen at 35s\nc3       unicast  seen at 35s\nc2       flood    seen at 50s\nnet1     flood    seen at 50s\nowner c1\nhost     arp      flood    unicast\nc2       35s      50s      20s\nc3       35s      never    35s\nnet1     never    50s      never\n",
+  ""
+ ],
+ "142": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc1       arp      seen at 5s\nc3       unicast  seen at 5s\nc1       unicast  seen at 20s\nc2       unicast  seen at 20s\nport moved from net1 to c1 at 35s. Timing starts again.\nnet1     arp      seen at 15s\nowner c1\nhost     arp      flood    unicast\nc2       never    never    never\nc3       n/a      never    never\nnet1     15s      never    never\n",
+  ""
+ ],
+ "143": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\nc1       unicast  seen at 0s\nnet1     arp      seen at 0s\nc3       flood    seen at 15s\nnet1     flood    seen at 15s\nc1       arp      seen at 30s\nc1       flood    seen at 30s\nc3       unicast  seen at 30s\nowner c2\nhost     arp      flood    unicast\nc1       30s      30s      0s\nc3       never    15s      30s\nnet1     0s       15s      never\n",
+  ""
+ ],
+ "144": [
+  "exit 2",
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\n",
+  "ERROR port owner net1 failed the preflight check: no sudo\n"
+ ],
+ "145": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 fd00::5 on net1, vni 100, from ACTIVE\n",
+  "ERROR port owner net1 failed the preflight check: no sudo\n"
+ ],
+ "146": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc1       flood    seen at 5s\nnet1     flood    seen at 5s\nnet1     unicast  seen at 5s\nc1       unicast  seen at 20s\nc1       arp      seen at 35s\nnet1     arp      seen at 35s\nowner c2\nhost     arp      flood    unicast\nc1       35s      5s       20s\nnet1     35s      5s       5s\n",
+  ""
+ ],
+ "147": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "148": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nc1       arp      seen at 0s\nc1       flood    seen at 0s\nc2       arp      seen at 0s\nc3       flood    seen at 0s\nc2       flood    seen at 15s\nc1       unicast  seen at 30s\nc3       unicast  seen at 30s\nport moved from net1 to c1 at 60s. Timing starts again.\nc2       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c1\nhost     arp      flood    unicast\nc2       0s       never    never\nc3       never    never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "149": [
+  0,
+  "port fa:16:3e:00:00:09 fd00::5 on c1, vni 100, port age 5s\nc2       flood    seen at 5s\nnet1     flood    seen at 5s\nc3       flood    seen at 20s\nc2       unicast  seen at 35s\nc3       unicast  seen at 50s\nnet1     unicast  seen at 50s\nowner c1\nhost     arp      flood    unicast\nc2       n/a      5s       35s\nc3       n/a      20s      50s\nnet1     n/a      5s       50s\n",
+  ""
+ ],
+ "15": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc1       arp      seen at 5s\nc1       flood    seen at 20s\nc1       unicast  seen at 35s\nnet1     flood    seen at 35s\nnet1     unicast  seen at 35s\nnet1     arp      seen at 50s\nowner c2\nhost     arp      flood    unicast\nc1       5s       20s      35s\nnet1     50s      35s      35s\n",
+  ""
+ ],
+ "150": [
+  0,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, from ACTIVE\nc1       arp      seen at 0s\nc1       unicast  seen at 0s\nc2       arp      seen at 0s\nc2       flood    seen at 0s\nc2       unicast  seen at 0s\nnet1     arp      seen at 0s\nnet1     flood    seen at 0s\nc1       flood    seen at 15s\nnet1     unicast  seen at 15s\nowner c3\nhost     arp      flood    unicast\nc1       0s       15s      0s\nc2       0s       0s       0s\nnet1     0s       0s       15s\n",
+  ""
+ ],
+ "151": [
+  2,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nport moved from net1 to c1 at 0s. Timing starts again.\nc2       arp      seen at 0s\nowner c1\nhost     arp      flood    unicast\nc2       0s       never    never\nnet1     never    never    never\n",
+  "c1       ERROR preflight: no sudo\n"
+ ],
+ "152": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "153": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc1       flood    seen at 15s\nc2       flood    seen at 30s\nc1       arp      seen at 45s\nowner net1\nhost     arp      flood    unicast\nc1       45s      15s      never\nc2       n/a      30s      never\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "154": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "155": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "156": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc2       unicast  seen at 0s\nc3       unicast  seen at 0s\nc2       flood    seen at 15s\nc3       arp      seen at 15s\nc3       flood    seen at 15s\nport moved from net1 to c1 at 30s. Timing starts again.\nc2       arp      seen at 0s\nc3       arp      seen at 0s\nnet1     arp      seen at 15s\nowner c1\nhost     arp      flood    unicast\nc2       0s       never    never\nc3       0s       never    never\nnet1     15s      never    never\n",
+  ""
+ ],
+ "157": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc1       flood    seen at 5s\nc2       flood    seen at 5s\nc2       unicast  seen at 5s\nc3       arp      seen at 5s\nc1       arp      seen at 20s\nc1       unicast  seen at 20s\nc2       arp      seen at 20s\nc3       flood    seen at 50s\nc3       unicast  seen at 50s\nowner net1\nhost     arp      flood    unicast\nc1       20s      5s       20s\nc2       20s      5s       5s\nc3       5s       50s      50s\n",
+  ""
+ ],
+ "158": [
+  2,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\nc1       arp      seen at 0s\nc1       flood    seen at 0s\nc1       unicast  seen at 0s\nc3       arp      seen at 0s\nc3       flood    seen at 0s\nc3       unicast  seen at 0s\nowner c2\nhost     arp      flood    unicast\nc1       0s       0s       0s\nc3       0s       0s       0s\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "159": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc1       arp      seen at 0s\nc3       arp      seen at 15s\nc1       flood    seen at 45s\nc1       unicast  seen at 45s\nc3       flood    seen at 45s\nc3       unicast  seen at 45s\nowner net1\nhost     arp      flood    unicast\nc1       0s       45s      45s\nc3       15s      45s      45s\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "16": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nc2       arp      seen at 5s\nnet1     flood    seen at 5s\nnet1     unicast  seen at 20s\nc2       flood    seen at 35s\nc2       unicast  seen at 35s\nnet1     arp      seen at 35s\nowner c3\nhost     arp      flood    unicast\nc2       5s       35s      35s\nnet1     35s      5s       20s\n",
+  ""
+ ],
+ "160": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       flood    seen at 0s\nc3       arp      seen at 0s\nc3       unicast  seen at 0s\nc2       unicast  seen at 30s\nc3       flood    seen at 30s\nowner c1\nhost     arp      flood    unicast\nc2       n/a      0s       30s\nc3       0s       30s      0s\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "161": [
+  2,
+  "port fa:16:3e:00:00:09 fd00::5 on c2, vni 100, port age 0s\nc1       flood    seen at 0s\nc1       unicast  seen at 45s\nowner c2\nhost     arp      flood    unicast\nc1       n/a      0s       45s\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "162": [
+  1,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, from ACTIVE\nc2       arp      seen at 0s\nc2       flood    seen at 0s\nc3       arp      seen at 0s\nc3       unicast  seen at 0s\nnet1     unicast  seen at 0s\nc2       unicast  seen at 15s\nnet1     arp      seen at 15s\nowner c1\nhost     arp      flood    unicast\nc2       0s       0s       15s\nc3       0s       never    0s\nnet1     15s      never    0s\n",
+  ""
+ ],
+ "163": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nc2       arp      seen at 0s\nc2       flood    seen at 0s\nc2       unicast  seen at 0s\nc3       flood    seen at 0s\nc3       unicast  seen at 0s\nport moved from net1 to c1 at 45s. Timing starts again.\nc2       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c1\nhost     arp      flood    unicast\nc2       0s       never    never\nc3       never    never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "164": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "165": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       arp      seen at 0s\nc2       unicast  seen at 0s\nnet1     flood    seen at 0s\nc2       flood    seen at 15s\nc3       flood    seen at 15s\nc3       arp      seen at 45s\nnet1     arp      seen at 45s\nnet1     unicast  seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       0s       15s      0s\nc3       45s      15s      never\nnet1     45s      0s       45s\n",
+  ""
+ ],
+ "166": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "167": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "168": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 5s\nc3       flood    seen at 5s\nc3       unicast  seen at 5s\nc2       flood    seen at 20s\nc3       arp      seen at 50s\nowner c1\nhost     arp      flood    unicast\nc2       n/a      20s      never\nc3       50s      5s       5s\n",
+  ""
+ ],
+ "169": [
+  "exit 2",
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\n",
+  "ERROR port owner c3 failed the preflight check: no sudo\n"
+ ],
+ "17": [
+  2,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, from ACTIVE\nc2       arp      seen at 0s\nowner c1\nhost     arp      flood    unicast\nc2       0s       never    never\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "170": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "171": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nc1       unicast  seen at 0s\nc2       arp      seen at 0s\nc2       flood    seen at 0s\nc2       unicast  seen at 0s\nc3       arp      seen at 0s\nc3       flood    seen at 0s\nc1       arp      seen at 15s\nc1       flood    seen at 15s\nport moved from net1 to c1 at 60s. Timing starts again.\nc2       arp      seen at 0s\nc3       arp      seen at 0s\nowner c1\nhost     arp      flood    unicast\nc2       0s       never    never\nc3       0s       never    never\nnet1     never    never    never\n",
+  ""
+ ],
+ "172": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nc2       flood    seen at 5s\nnet1     flood    seen at 5s\nc1       unicast  seen at 20s\nport moved from c3 to net1 at 35s. Timing starts again.\nc3       arp      seen at 0s\nowner net1\nhost     arp      flood    unicast\nc1       never    never    never\nc2       n/a      never    never\nc3       0s       never    never\n",
+  ""
+ ],
+ "173": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc1       flood    seen at 0s\nnet1     unicast  seen at 0s\nc1       unicast  seen at 15s\nc2       flood    seen at 15s\nc1       arp      seen at 30s\nc2       arp      seen at 45s\nc2       unicast  seen at 45s\nowner c3\nhost     arp      flood    unicast\nc1       30s      0s       15s\nc2       45s      15s      45s\nnet1     n/a      never    0s\n",
+  ""
+ ],
+ "174": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       unicast  seen at 0s\nnet1     unicast  seen at 0s\nc2       arp      seen at 30s\nc3       arp      seen at 30s\nc3       flood    seen at 30s\nnet1     arp      seen at 30s\nnet1     flood    seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       30s      never    0s\nc3       30s      30s      never\nnet1     30s      45s      0s\n",
+  ""
+ ],
+ "175": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc3       arp      seen at 20s\nport moved from net1 to c1 at 35s. Timing starts again.\nc3       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c1\nhost     arp      flood    unicast\nc3       0s       never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "176": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 5s\nc2       arp      seen at 5s\nc2       flood    seen at 5s\nc2       unicast  seen at 35s\nnet1     flood    seen at 35s\nnet1     unicast  seen at 35s\nnet1     arp      seen at 50s\nowner c1\nhost     arp      flood    unicast\nc2       5s       5s       35s\nnet1     50s      35s      35s\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "177": [
+  2,
+  "port fa:16:3e:00:00:09 fd00::5 on c2, vni 100, port age 5s\nnet1     unicast  seen at 5s\nnet1     flood    seen at 50s\nowner c2\nhost     arp      flood    unicast\nnet1     n/a      50s      5s\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "178": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "179": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nnet1     flood    seen at 20s\nc3       arp      seen at 35s\nc3       flood    seen at 35s\nnet1     unicast  seen at 35s\nnet1     arp      seen at 50s\nowner c2\nhost     arp      flood    unicast\nc3       35s      35s      never\nnet1     50s      20s      35s\n",
+  ""
+ ],
+ "18": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc3       flood    seen at 5s\nc1       arp      seen at 20s\nport moved from c2 to c3 at 35s. Timing starts again.\nc1       arp      seen at 0s\nc2       arp      seen at 15s\nowner c3\nhost     arp      flood    unicast\nc1       0s       never    never\nc2       15s      never    never\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "180": [
+  1,
+  "port fa:16:3e:00:00:09 fd00::5 on c2, vni 100, port age 5s\nc1       unicast  seen at 5s\nnet1     flood    seen at 20s\nport moved from c2 to c3 at 35s. Timing starts again.\nowner c3\nhost     arp      flood    unicast\nc1       n/a      never    never\nc2       n/a      never    never\nnet1     n/a      never    never\n",
+  ""
+ ],
+ "181": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       arp      seen at 0s\nc2       unicast  seen at 0s\nc3       arp      seen at 0s\nc2       flood    seen at 15s\nc3       flood    seen at 30s\nc3       unicast  seen at 30s\nnet1     arp      seen at 30s\nnet1     flood    seen at 30s\nnet1     unicast  seen at 30s\nowner c1\nhost     arp      flood    unicast\nc2       0s       15s      0s\nc3       0s       30s      30s\nnet1     30s      30s      30s\n",
+  ""
+ ],
+ "182": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc1       flood    seen at 5s\nc2       unicast  seen at 5s\nc3       arp      seen at 5s\nc3       flood    seen at 20s\nport moved from net1 to c1 at 35s. Timing starts again.\nc3       arp      seen at 0s\nnet1     arp      seen at 0s\nc2       arp      seen at 15s\nowner c1\nhost     arp      flood    unicast\nc2       15s      never    never\nc3       0s       never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "183": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 5s\nc2       arp      seen at 5s\nc2       flood    seen at 5s\nnet1     flood    seen at 5s\nc3       unicast  seen at 20s\nport moved from c1 to c2 at 35s. Timing starts again.\nowner c2\nhost     arp      flood    unicast\nc1       n/a      never    never\nc3       n/a      never    never\nnet1     n/a      never    never\n",
+  ""
+ ],
+ "184": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nc1       unicast  seen at 5s\nport moved from c3 to net1 at 35s. Timing starts again.\nc3       arp      seen at 0s\nc1       arp      seen at 15s\nowner net1\nhost     arp      flood    unicast\nc1       15s      never    never\nc3       0s       never    never\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "185": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc3       arp      seen at 0s\nc3       flood    seen at 15s\nc2       arp      seen at 30s\nnet1     arp      seen at 30s\nc2       flood    seen at 45s\nc3       unicast  seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       30s      45s      never\nc3       0s       15s      45s\nnet1     30s      never    never\n",
+  ""
+ ],
+ "186": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "187": [
+  0,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, from ACTIVE\nc1       unicast  seen at 0s\nc2       unicast  seen at 0s\nc1       arp      seen at 15s\nc1       flood    seen at 15s\nc2       flood    seen at 15s\nowner c3\nhost     arp      flood    unicast\nc1       15s      15s      0s\nc2       n/a      15s      0s\n",
+  ""
+ ],
+ "188": [
+  1,
+  "port fa:16:3e:00:00:09 fd00::5 on c2, vni 100, port age 5s\nnet1     unicast  seen at 5s\nc1       flood    seen at 35s\nc1       unicast  seen at 35s\nnet1     flood    seen at 35s\nc3       unicast  seen at 50s\nowner c2\nhost     arp      flood    unicast\nc1       n/a      35s      35s\nc3       n/a      never    50s\nnet1     n/a      35s      5s\n",
+  ""
+ ],
+ "189": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nc2       arp      seen at 0s\nc2       unicast  seen at 0s\nc3       arp      seen at 0s\nc3       flood    seen at 0s\nc3       unicast  seen at 0s\nowner net1\nhost     arp      flood    unicast\nc2       0s       never    0s\nc3       0s       0s       0s\n",
+  ""
+ ],
+ "19": [
+  0,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, from ACTIVE\nc2       flood    seen at 0s\nc2       arp      seen at 15s\nc2       unicast  seen at 15s\nowner c1\nhost     arp      flood    unicast\nc2       15s      0s       15s\n",
+  ""
+ ],
+ "190": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       flood    seen at 0s\nc3       flood    seen at 0s\nport moved from c1 to c2 at 30s. Timing starts again.\nc1       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c2\nhost     arp      flood    unicast\nc1       0s       never    never\nc3       never    never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "191": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "192": [
+  0,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, from ACTIVE\nc1       unicast  seen at 0s\nnet1     unicast  seen at 0s\nc1       flood    seen at 15s\nnet1     arp      seen at 15s\nc1       arp      seen at 30s\nnet1     flood    seen at 30s\nowner c3\nhost     arp      flood    unicast\nc1       30s      15s      0s\nnet1     15s      30s      0s\n",
+  ""
+ ],
+ "193": [
+  1,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nport moved from net1 to c1 at 0s. Timing starts again.\nc3       arp      seen at 0s\nc2       arp      seen at 15s\nowner c1\nhost     arp      flood    unicast\nc2       15s      never    never\nc3       0s       never    never\nnet1     n/a      never    never\n",
+  ""
+ ],
+ "194": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nnet1     arp      seen at 0s\nc2       unicast  seen at 15s\nnet1     unicast  seen at 15s\nc2       flood    seen at 30s\nc2       arp      seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       45s      30s      15s\nnet1     0s       never    15s\n",
+  ""
+ ],
+ "195": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc1       unicast  seen at 20s\nc2       unicast  seen at 20s\nc2       arp      seen at 35s\nc2       flood    seen at 35s\nowner net1\nhost     arp      flood    unicast\nc1       n/a      never    20s\nc2       35s      35s      20s\n",
+  ""
+ ],
+ "196": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, from ACTIVE\nc2       arp      seen at 0s\nc2       unicast  seen at 0s\nc3       arp      seen at 0s\nc3       unicast  seen at 0s\nnet1     flood    seen at 0s\nnet1     unicast  seen at 0s\nport moved from c1 to c2 at 45s. Timing starts again.\nc1       arp      seen at 0s\nc3       arp      seen at 0s\nowner c2\nhost     arp      flood    unicast\nc1       0s       never    never\nc3       0s       never    never\nnet1     never    never    never\n",
+  ""
+ ],
+ "197": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 5s\nc2       unicast  seen at 20s\nc3       flood    seen at 20s\nc3       unicast  seen at 20s\nc2       flood    seen at 50s\nowner c1\nhost     arp      flood    unicast\nc2       never    50s      20s\nc3       never    20s      20s\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "198": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 5s\nc3       flood    seen at 5s\nc2       arp      seen at 20s\nc2       unicast  seen at 20s\nc2       flood    seen at 50s\nc3       arp      seen at 50s\nnet1     arp      seen at 50s\nowner c1\nhost     arp      flood    unicast\nc2       20s      50s      20s\nc3       50s      5s       never\nnet1     50s      never    never\n",
+  ""
+ ],
+ "199": [
+  2,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 fd00::5 on net1, vni 100, from ACTIVE\nowner net1\nhost     arp      flood    unicast\nc1       n/a      never    never\nc2       n/a      never    never\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "2": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 5s\nc2       flood    seen at 5s\nowner c1\nhost     arp      flood    unicast\nc2       n/a      5s       never\n",
+  ""
+ ],
+ "20": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc1       unicast  seen at 5s\nnet1     flood    seen at 20s\nnet1     unicast  seen at 20s\nport moved from c2 to c3 at 35s. Timing starts again.\nc1       arp      seen at 15s\nnet1     arp      seen at 15s\nowner c3\nhost     arp      flood    unicast\nc1       15s      never    never\nnet1     15s      never    never\n",
+  ""
+ ],
+ "200": [
+  0,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, from ACTIVE\nc3       flood    seen at 0s\nc3       unicast  seen at 0s\nnet1     arp      seen at 0s\nc2       flood    seen at 15s\nnet1     flood    seen at 15s\nc2       arp      seen at 30s\nc2       unicast  seen at 30s\nc3       arp      seen at 30s\nnet1     unicast  seen at 30s\nowner c1\nhost     arp      flood    unicast\nc2       30s      15s      30s\nc3       30s      0s       0s\nnet1     0s       15s      30s\n",
+  ""
+ ],
+ "201": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "202": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "203": [
+  1,
+  "port fa:16:3e:00:00:09 fd00::5 on c1, vni 100, port age 5s\nc2       unicast  seen at 5s\nc3       flood    seen at 5s\nc3       unicast  seen at 5s\nc2       flood    seen at 35s\nnet1     flood    seen at 35s\nowner c1\nhost     arp      flood    unicast\nc2       n/a      35s      5s\nc3       n/a      5s       5s\nnet1     n/a      35s      never\n",
+  ""
+ ],
+ "204": [
+  1,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nc1       flood    seen at 0s\nc1       unicast  seen at 0s\nc3       arp      seen at 0s\nc3       flood    seen at 15s\nowner net1\nhost     arp      flood    unicast\nc1       never    0s       0s\nc3       0s       15s      never\n",
+  ""
+ ],
+ "205": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc1       unicast  seen at 0s\nc1       flood    seen at 15s\nc2       arp      seen at 15s\nc2       flood    seen at 15s\nc2       unicast  seen at 15s\nowner net1\nhost     arp      flood    unicast\nc1       n/a      15s      0s\nc2       15s      15s      15s\n",
+  ""
+ ],
+ "206": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       arp      seen at 15s\nc2       unicast  seen at 15s\nc3       arp      seen at 15s\nc3       flood    seen at 15s\nc3       unicast  seen at 30s\nnet1     flood    seen at 30s\nnet1     arp      seen at 45s\nnet1     unicast  seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       15s      never    15s\nc3       15s      15s      30s\nnet1     45s      30s      45s\n",
+  ""
+ ],
+ "207": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\nc1       arp      seen at 0s\nnet1     arp      seen at 0s\nport moved from c2 to c3 at 15s. Timing starts again.\nc1       arp      seen at 0s\nc2       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c3\nhost     arp      flood    unicast\nc1       0s       never    never\nc2       0s       never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "208": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nnet1     arp      seen at 15s\nnet1     flood    seen at 30s\nowner c3\nhost     arp      flood    unicast\nnet1     15s      30s      never\n",
+  ""
+ ],
+ "209": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc3       unicast  seen at 0s\nc2       unicast  seen at 15s\nc3       arp      seen at 15s\nc2       flood    seen at 30s\nc3       flood    seen at 30s\nnet1     unicast  seen at 30s\nc2       arp      seen at 45s\nnet1     arp      seen at 45s\nnet1     flood    seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       45s      30s      15s\nc3       15s      30s      0s\nnet1     45s      45s      30s\n",
+  ""
+ ],
+ "21": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 0s\nc3       arp      seen at 0s\nnet1     flood    seen at 0s\nc1       flood    seen at 15s\nnet1     unicast  seen at 15s\nport moved from c2 to c3 at 30s. Timing starts again.\nnet1     arp      seen at 15s\nowner c3\nhost     arp      flood    unicast\nc1       n/a      never    never\nc2       n/a      never    never\nnet1     15s      never    never\n",
+  ""
+ ],
+ "210": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc2       arp      seen at 0s\nc3       arp      seen at 0s\nc3       unicast  seen at 0s\nc2       unicast  seen at 45s\nowner net1\nhost     arp      flood    unicast\nc2       0s       never    45s\nc3       0s       never    0s\n",
+  ""
+ ],
+ "211": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, from ACTIVE\n",
+  "ERROR port owner c3 failed the preflight check: no sudo\n"
+ ],
+ "212": [
+  1,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nc1       arp      seen at 0s\nc1       unicast  seen at 0s\nc2       unicast  seen at 0s\nc3       arp      seen at 0s\nc1       flood    seen at 15s\nc2       flood    seen at 15s\nc3       unicast  seen at 15s\nc3       flood    seen at 30s\nowner net1\nhost     arp      flood    unicast\nc1       0s       15s      0s\nc2       never    15s      0s\nc3       0s       30s      15s\n",
+  ""
+ ],
+ "213": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc1       arp      seen at 20s\nnet1     flood    seen at 20s\nc1       flood    seen at 35s\nc1       unicast  seen at 50s\nnet1     arp      seen at 50s\nowner c2\nhost     arp      flood    unicast\nc1       20s      35s      50s\nnet1     50s      20s      never\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "214": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nnet1     flood    seen at 5s\nnet1     unicast  seen at 20s\nc2       arp      seen at 35s\nowner c3\nhost     arp      flood    unicast\nc2       35s      never    never\nnet1     n/a      5s       20s\n",
+  ""
+ ],
+ "215": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "216": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "217": [
+  1,
+  "port fa:16:3e:00:00:09 fd00::5 on c3, vni 100, port age 5s\nnet1     flood    seen at 5s\nc2       unicast  seen at 20s\nowner c3\nhost     arp      flood    unicast\nc2       n/a      never    20s\nnet1     n/a      5s       never\n",
+  ""
+ ],
+ "218": [
+  "exit 2",
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\n",
+  "ERROR port owner c3 failed the preflight check: no sudo\n"
+ ],
+ "219": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc1       unicast  seen at 0s\nc2       flood    seen at 0s\nc2       arp      seen at 15s\nc1       arp      seen at 30s\nc1       flood    seen at 45s\nc2       unicast  seen at 45s\nowner c3\nhost     arp      flood    unicast\nc1       30s      45s      0s\nc2       15s      0s       45s\n",
+  ""
+ ],
+ "22": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc1       arp      seen at 5s\nnet1     arp      seen at 5s\nnet1     unicast  seen at 5s\nc1       flood    seen at 20s\nc1       unicast  seen at 35s\nowner c2\nhost     arp      flood    unicast\nc1       5s       20s      35s\nnet1     5s       never    5s\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "220": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "221": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc3       arp      seen at 5s\nc3       unicast  seen at 20s\nport moved from c2 to c3 at 35s. Timing starts again.\nc2       arp      seen at 0s\nowner c3\nhost     arp      flood    unicast\nc2       0s       never    never\n",
+  ""
+ ],
+ "222": [
+  0,
+  "port fa:16:3e:00:00:09 fd00::5 on c1, vni 100, port age 5s\nnet1     unicast  seen at 20s\nnet1     flood    seen at 35s\nowner c1\nhost     arp      flood    unicast\nnet1     n/a      35s      20s\n",
+  ""
+ ],
+ "223": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nc2       unicast  seen at 5s\nc2       flood    seen at 35s\nnet1     arp      seen at 35s\nnet1     flood    seen at 35s\nnet1     unicast  seen at 50s\nowner c3\nhost     arp      flood    unicast\nc2       n/a      35s      5s\nnet1     35s      35s      50s\n",
+  "c1       ERROR preflight: no sudo\n"
+ ],
+ "224": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "225": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nnet1     unicast  seen at 5s\nc3       arp      seen at 20s\nc3       flood    seen at 20s\nnet1     arp      seen at 35s\nnet1     flood    seen at 35s\nowner c2\nhost     arp      flood    unicast\nc3       20s      20s      never\nnet1     35s      35s      5s\n",
+  ""
+ ],
+ "226": [
+  "exit 2",
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\n",
+  "ERROR port owner net1 failed the preflight check: no sudo\n"
+ ],
+ "227": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\n",
+  "ERROR port owner net1 failed the preflight check: no sudo\n"
+ ],
+ "228": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nowner c2\nhost     arp      flood    unicast\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "229": [
+  "exit 2",
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 0s\n",
+  "ERROR port owner c2 failed the preflight check: no sudo\n"
+ ],
+ "23": [
+  0,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, from ACTIVE\nc1       unicast  seen at 0s\nc2       arp      seen at 0s\nnet1     flood    seen at 0s\nnet1     unicast  seen at 0s\nc1       flood    seen at 15s\nc2       flood    seen at 15s\nc2       unicast  seen at 30s\nnet1     arp      seen at 30s\nowner c3\nhost     arp      flood    unicast\nc1       n/a      15s      0s\nc2       0s       15s      30s\nnet1     30s      0s       0s\n",
+  ""
+ ],
+ "230": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc3       unicast  seen at 5s\nc3       flood    seen at 20s\nc3       arp      seen at 35s\nc1       arp      seen at 50s\nport moved from c2 to c3 at 80s. Timing starts again.\nc1       arp      seen at 0s\nc2       arp      seen at 0s\nowner c3\nhost     arp      flood    unicast\nc1       0s       never    never\nc2       0s       never    never\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "231": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "232": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nc2       flood    seen at 5s\nnet1     arp      seen at 5s\nc1       arp      seen at 20s\nc1       unicast  seen at 20s\nnet1     flood    seen at 20s\nc2       unicast  seen at 35s\nnet1     unicast  seen at 35s\nc1       flood    seen at 50s\nowner c3\nhost     arp      flood    unicast\nc1       20s      50s      20s\nc2       n/a      5s       35s\nnet1     5s       20s      35s\n",
+  ""
+ ],
+ "233": [
+  0,
+  "port fa:16:3e:00:00:09 fd00::5 on c2, vni 100, port age 0s\nc1       flood    seen at 0s\nc1       unicast  seen at 0s\nc3       flood    seen at 0s\nnet1     unicast  seen at 0s\nnet1     flood    seen at 15s\nc3       unicast  seen at 45s\nowner c2\nhost     arp      flood    unicast\nc1       n/a      0s       0s\nc3       n/a      0s       45s\nnet1     n/a      15s      0s\n",
+  ""
+ ],
+ "234": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nc2       unicast  seen at 5s\nnet1     flood    seen at 5s\nc1       arp      seen at 35s\nc1       flood    seen at 35s\nc1       unicast  seen at 35s\nc2       arp      seen at 50s\nnet1     unicast  seen at 50s\nowner c3\nhost     arp      flood    unicast\nc1       35s      35s      35s\nc2       50s      never    5s\nnet1     n/a      5s       50s\n",
+  ""
+ ],
+ "235": [
+  0,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 fd00::5 on c3, vni 100, from ACTIVE\nc1       flood    seen at 0s\nc1       unicast  seen at 0s\nc2       unicast  seen at 0s\nnet1     unicast  seen at 0s\nc2       flood    seen at 30s\nnet1     flood    seen at 30s\nowner c3\nhost     arp      flood    unicast\nc1       n/a      0s       0s\nc2       n/a      30s      0s\nnet1     n/a      30s      0s\n",
+  ""
+ ],
+ "236": [
+  "exit 2",
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\n",
+  "ERROR port owner c3 failed the preflight check: no sudo\n"
+ ],
+ "237": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 fd00::5 on net1, vni 100, from ACTIVE\n",
+  "ERROR port owner net1 failed the preflight check: no sudo\n"
+ ],
+ "238": [
+  1,
+  "port fa:16:3e:00:00:09 fd00::5 on c3, vni 100, port age 0s\nc2       flood    seen at 0s\nc2       unicast  seen at 0s\nowner c3\nhost     arp      flood    unicast\nc1       n/a      never    never\nc2       n/a      0s       0s\n",
+  ""
+ ],
+ "239": [
+  1,
+  "port fa:16:3e:00:00:09 fd00::5 on c1, vni 100, port age 5s\nc3       flood    seen at 5s\nnet1     flood    seen at 5s\nnet1     unicast  seen at 5s\nc2       unicast  seen at 20s\nc2       flood    seen at 35s\nport moved from c1 to c2 at 80s. Timing starts again.\nowner c2\nhost     arp      flood    unicast\nc1       n/a      never    never\nc3       n/a      never    never\nnet1     n/a      never    never\n",
+  ""
+ ],
+ "24": [
+  0,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nc1       arp      seen at 0s\nc1       flood    seen at 0s\nc1       unicast  seen at 0s\nc2       arp      seen at 0s\nc2       flood    seen at 15s\nc2       unicast  seen at 15s\nowner net1\nhost     arp      flood    unicast\nc1       0s       0s       0s\nc2       0s       15s      15s\n",
+  ""
+ ],
+ "240": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       flood    seen at 0s\nc2       arp      seen at 15s\nnet1     unicast  seen at 15s\nc2       unicast  seen at 30s\nowner c1\nhost     arp      flood    unicast\nc2       15s      0s       30s\nnet1     n/a      never    15s\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "241": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 5s\nc2       flood    seen at 5s\nc2       arp      seen at 20s\nc2       unicast  seen at 20s\nc3       flood    seen at 20s\nowner c1\nhost     arp      flood    unicast\nc2       20s      5s       20s\nc3       n/a      20s      never\n",
+  ""
+ ],
+ "242": [
+  2,
+  "port fa:16:3e:00:00:09 fd00::5 on c3, vni 100, port age 5s\nnet1     flood    seen at 5s\nc1       unicast  seen at 50s\nowner c3\nhost     arp      flood    unicast\nc1       n/a      never    50s\nnet1     n/a      5s       never\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "243": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc1       arp      seen at 0s\nc2       flood    seen at 15s\nnet1     flood    seen at 15s\nport moved from c3 to net1 at 30s. Timing starts again.\nc1       arp      seen at 0s\nowner net1\nhost     arp      flood    unicast\nc1       0s       never    never\nc2       never    never    never\nc3       never    never    never\n",
+  ""
+ ],
+ "244": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc2       flood    seen at 15s\nc2       unicast  seen at 15s\nc3       arp      seen at 15s\nc3       unicast  seen at 15s\nc1       arp      seen at 30s\nc1       flood    seen at 30s\nc1       unicast  seen at 30s\nc3       flood    seen at 45s\nowner net1\nhost     arp      flood    unicast\nc1       30s      30s      30s\nc2       n/a      15s      15s\nc3       15s      45s      15s\n",
+  ""
+ ],
+ "245": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 0s\nc1       arp      seen at 0s\nc1       flood    seen at 15s\nc1       unicast  seen at 30s\nowner c2\nhost     arp      flood    unicast\nc1       0s       15s      30s\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "246": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nnet1     arp      seen at 0s\nnet1     flood    seen at 0s\nnet1     unicast  seen at 0s\nc3       unicast  seen at 15s\nc3       arp      seen at 30s\nc3       flood    seen at 45s\nowner c1\nhost     arp      flood    unicast\nc3       30s      45s      15s\nnet1     0s       0s       0s\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "247": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc1       unicast  seen at 0s\nc1       arp      seen at 15s\nc1       flood    seen at 45s\nowner net1\nhost     arp      flood    unicast\nc1       15s      45s      0s\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "248": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "249": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc1       arp      seen at 0s\nc2       flood    seen at 0s\nnet1     arp      seen at 15s\nnet1     unicast  seen at 15s\nc2       unicast  seen at 30s\nc1       flood    seen at 45s\nc2       arp      seen at 45s\nnet1     flood    seen at 45s\nowner c3\nhost     arp      flood    unicast\nc1       0s       45s      never\nc2       45s      0s       30s\nnet1     15s      45s      15s\n",
+  ""
+ ],
+ "25": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\n",
+  "ERROR port owner net1 failed the preflight check: no sudo\n"
+ ],
+ "250": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc1       arp      seen at 15s\nc1       flood    seen at 30s\nc2       arp      seen at 30s\nc3       unicast  seen at 30s\nc1       unicast  seen at 45s\nc2       flood    seen at 45s\nc2       unicast  seen at 45s\nowner net1\nhost     arp      flood    unicast\nc1       15s      30s      45s\nc2       30s      45s      45s\nc3       n/a      never    30s\n",
+  ""
+ ],
+ "251": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "252": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "253": [
+  1,
+  "port fa:16:3e:00:00:09 fd00::5 on net1, vni 100, port age 0s\nc2       unicast  seen at 0s\nc1       flood    seen at 30s\nc1       unicast  seen at 45s\nowner net1\nhost     arp      flood    unicast\nc1       n/a      30s      45s\nc2       n/a      never    0s\n",
+  ""
+ ],
+ "254": [
+  "exit 2",
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\n",
+  "ERROR port owner c3 failed the preflight check: no sudo\n"
+ ],
+ "255": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 5s\nnet1     arp      seen at 5s\nc2       flood    seen at 20s\nnet1     unicast  seen at 20s\nport moved from c1 to c2 at 35s. Timing starts again.\nnet1     arp      seen at 0s\nc1       arp      seen at 15s\nowner c2\nhost     arp      flood    unicast\nc1       15s      never    never\nnet1     0s       never    never\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "256": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc1       arp      seen at 15s\nc1       unicast  seen at 15s\nc2       arp      seen at 30s\nc2       flood    seen at 30s\nc3       arp      seen at 30s\nc3       flood    seen at 30s\nport moved from net1 to c1 at 75s. Timing starts again.\nc2       arp      seen at 0s\nc3       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c1\nhost     arp      flood    unicast\nc2       0s       never    never\nc3       0s       never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "257": [
+  2,
+  "port fa:16:3e:00:00:09 fd00::5 on c3, vni 100, port age 0s\nc2       unicast  seen at 45s\nowner c3\nhost     arp      flood    unicast\nc2       n/a      never    45s\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "258": [
+  "exit 2",
+  "port fa:16:3e:00:00:09 fd00::5 on c1, vni 100, port age 0s\n",
+  "ERROR port owner c1 failed the preflight check: no sudo\n"
+ ],
+ "259": [
+  2,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, from ACTIVE\nc3       unicast  seen at 0s\nnet1     arp      seen at 0s\nnet1     flood    seen at 0s\nnet1     unicast  seen at 0s\nc3       flood    seen at 15s\nport moved from c1 to c2 at 60s. Timing starts again.\nc1       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c2\nhost     arp      flood    unicast\nc1       0s       never    never\nc3       never    never    never\nnet1     0s       never    never\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "26": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "260": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 0s\nc1       flood    seen at 0s\nc1       unicast  seen at 30s\nc1       arp      seen at 45s\nowner c2\nhost     arp      flood    unicast\nc1       45s      0s       30s\nnet1     never    never    never\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "261": [
+  2,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nc1       arp      seen at 0s\nc1       flood    seen at 15s\nc1       unicast  seen at 30s\nowner net1\nhost     arp      flood    unicast\nc1       0s       15s      30s\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "262": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "263": [
+  2,
+  "port fa:16:3e:00:00:09 fd00::5 on net1, vni 100, port age 5s\nc3       flood    seen at 20s\nport moved from net1 to c1 at 35s. Timing starts again.\nowner c1\nhost     arp      flood    unicast\nc2       n/a      never    never\nc3       n/a      never    never\nnet1     n/a      never    never\n",
+  "c1       ERROR preflight: no sudo\n"
+ ],
+ "264": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc1       unicast  seen at 0s\nnet1     arp      seen at 15s\nnet1     unicast  seen at 15s\nport moved from c3 to net1 at 30s. Timing starts again.\nc1       arp      seen at 0s\nc3       arp      seen at 15s\nowner net1\nhost     arp      flood    unicast\nc1       0s       never    never\nc2       n/a      never    never\nc3       15s      never    never\n",
+  ""
+ ],
+ "265": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc2       unicast  seen at 0s\nc1       arp      seen at 15s\nc1       flood    seen at 15s\nc2       arp      seen at 15s\nc3       flood    seen at 15s\nc1       unicast  seen at 30s\nc3       arp      seen at 30s\nc3       unicast  seen at 45s\nowner net1\nhost     arp      flood    unicast\nc1       15s      15s      30s\nc2       15s      never    0s\nc3       30s      15s      45s\n",
+  ""
+ ],
+ "266": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc3       flood    seen at 0s\nnet1     flood    seen at 15s\nnet1     unicast  seen at 15s\nnet1     arp      seen at 30s\nowner c1\nhost     arp      flood    unicast\nc3       n/a      0s       never\nnet1     30s      15s      15s\n",
+  ""
+ ],
+ "267": [
+  1,
+  "port fa:16:3e:00:00:09 fd00::5 on c2, vni 100, port age 0s\nc1       unicast  seen at 0s\nnet1     unicast  seen at 0s\nc3       flood    seen at 15s\nnet1     flood    seen at 45s\nowner c2\nhost     arp      flood    unicast\nc1       n/a      never    0s\nc3       n/a      15s      never\nnet1     n/a      45s      0s\n",
+  ""
+ ],
+ "268": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc2       flood    seen at 15s\nc2       unicast  seen at 15s\nnet1     arp      seen at 15s\nc2       arp      seen at 30s\nnet1     flood    seen at 30s\nowner c3\nhost     arp      flood    unicast\nc2       30s      15s      15s\nnet1     15s      30s      never\n",
+  ""
+ ],
+ "269": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 5s\nc2       flood    seen at 5s\nc3       flood    seen at 5s\nc3       unicast  seen at 5s\nnet1     arp      seen at 5s\nc2       arp      seen at 20s\nport moved from c1 to c2 at 35s. Timing starts again.\nc1       arp      seen at 0s\nnet1     arp      seen at 0s\nc3       arp      seen at 15s\nowner c2\nhost     arp      flood    unicast\nc1       0s       never    never\nc3       15s      never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "27": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "270": [
+  1,
+  "port fa:16:3e:00:00:09 fd00::5 on c2, vni 100, port age 0s\nnet1     flood    seen at 15s\nport moved from c2 to c3 at 30s. Timing starts again.\nowner c3\nhost     arp      flood    unicast\nc1       n/a      never    never\nc2       n/a      never    never\nnet1     n/a      never    never\n",
+  ""
+ ],
+ "271": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\n",
+  "ERROR port owner net1 failed the preflight check: no sudo\n"
+ ],
+ "272": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc2       unicast  seen at 15s\nport moved from net1 to c1 at 30s. Timing starts again.\nnet1     arp      seen at 0s\nowner c1\nhost     arp      flood    unicast\nc2       n/a      never    never\nnet1     0s       never    never\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "273": [
+  1,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\nport moved from c2 to c3 at 0s. Timing starts again.\nnet1     arp      seen at 0s\nowner c3\nhost     arp      flood    unicast\nc2       n/a      never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "274": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nowner c2\nhost     arp      flood    unicast\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "275": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nnet1     arp      seen at 15s\nnet1     flood    seen at 15s\nport moved from c1 to c2 at 30s. Timing starts again.\nnet1     arp      seen at 0s\nowner c2\nhost     arp      flood    unicast\nc1       never    never    never\nc3       n/a      never    never\nnet1     0s       never    never\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "276": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nnet1     flood    seen at 5s\nc1       unicast  seen at 20s\nnet1     arp      seen at 20s\nport moved from c3 to net1 at 35s. Timing starts again.\nc2       arp      seen at 0s\nc3       arp      seen at 0s\nc1       arp      seen at 15s\nowner net1\nhost     arp      flood    unicast\nc1       15s      never    never\nc2       0s       never    never\nc3       0s       never    never\n",
+  ""
+ ],
+ "277": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, from ACTIVE\nc3       flood    seen at 0s\nc3       unicast  seen at 0s\nnet1     arp      seen at 0s\nnet1     flood    seen at 0s\nnet1     unicast  seen at 0s\nowner c1\nhost     arp      flood    unicast\nc2       n/a      never    never\nc3       n/a      0s       0s\nnet1     0s       0s       0s\n",
+  ""
+ ],
+ "278": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nnet1     unicast  seen at 5s\nc1       flood    seen at 20s\nc2       flood    seen at 20s\nc1       arp      seen at 35s\nc2       unicast  seen at 35s\nc1       unicast  seen at 50s\nnet1     arp      seen at 50s\nport moved from c3 to net1 at 80s. Timing starts again.\nc1       arp      seen at 0s\nc3       arp      seen at 0s\nowner net1\nhost     arp      flood    unicast\nc1       0s       never    never\nc2       n/a      never    never\nc3       0s       never    never\n",
+  ""
+ ],
+ "279": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc1       arp      seen at 5s\nc2       arp      seen at 20s\nc2       flood    seen at 20s\nc1       flood    seen at 35s\nc2       unicast  seen at 50s\nowner net1\nhost     arp      flood    unicast\nc1       5s       35s      never\nc2       20s      20s      50s\n",
+  ""
+ ],
+ "28": [
+  0,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 fd00::5 on c1, vni 100, from ACTIVE\nc2       flood    seen at 0s\nc2       unicast  seen at 0s\nnet1     unicast  seen at 0s\nnet1     flood    seen at 15s\nowner c1\nhost     arp      flood    unicast\nc2       n/a      0s       0s\nnet1     n/a      15s      0s\n",
+  ""
+ ],
+ "280": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nc2       arp      seen at 20s\nport moved from c3 to net1 at 35s. Timing starts again.\nc2       arp      seen at 0s\nowner net1\nhost     arp      flood    unicast\nc2       0s       never    never\n",
+  "c1       ERROR preflight: no sudo\n"
+ ],
+ "281": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       unicast  seen at 0s\nc3       flood    seen at 0s\nnet1     unicast  seen at 0s\nc2       flood    seen at 15s\nnet1     arp      seen at 15s\nnet1     flood    seen at 15s\nc3       arp      seen at 45s\nport moved from c1 to c2 at 75s. Timing starts again.\nc1       arp      seen at 0s\nc3       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c2\nhost     arp      flood    unicast\nc1       0s       never    never\nc3       0s       never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "282": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "283": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc3       arp      seen at 0s\nc2       arp      seen at 15s\nc2       unicast  seen at 15s\nc3       unicast  seen at 15s\nnet1     arp      seen at 45s\nnet1     flood    seen at 45s\nnet1     unicast  seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       15s      never    15s\nc3       0s       never    15s\nnet1     45s      45s      45s\n",
+  ""
+ ],
+ "284": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "285": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc1       arp      seen at 0s\nc1       flood    seen at 30s\nnet1     arp      seen at 30s\nnet1     unicast  seen at 30s\nc1       unicast  seen at 45s\nowner c3\nhost     arp      flood    unicast\nc1       0s       30s      45s\nnet1     30s      never    30s\n",
+  ""
+ ],
+ "286": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc3       arp      seen at 5s\nc1       arp      seen at 20s\nc2       arp      seen at 20s\nc3       flood    seen at 20s\nc3       unicast  seen at 20s\nc1       unicast  seen at 35s\nc2       flood    seen at 35s\nc2       unicast  seen at 50s\nowner net1\nhost     arp      flood    unicast\nc1       20s      never    35s\nc2       20s      35s      50s\nc3       5s       20s      20s\n",
+  ""
+ ],
+ "287": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc3       arp      seen at 0s\nc3       flood    seen at 0s\nnet1     flood    seen at 30s\nnet1     unicast  seen at 45s\nowner c1\nhost     arp      flood    unicast\nc3       0s       0s       never\nnet1     n/a      30s      45s\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "288": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "289": [
+  0,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, from ACTIVE\nc1       flood    seen at 0s\nc2       flood    seen at 0s\nc1       arp      seen at 15s\nc1       unicast  seen at 15s\nc2       arp      seen at 15s\nc2       unicast  seen at 15s\nowner c3\nhost     arp      flood    unicast\nc1       15s      0s       15s\nc2       15s      0s       15s\n",
+  ""
+ ],
+ "29": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 5s\nc2       arp      seen at 5s\nc3       flood    seen at 5s\nc2       unicast  seen at 20s\nc3       arp      seen at 35s\nnet1     arp      seen at 35s\nc2       flood    seen at 50s\nc3       unicast  seen at 50s\nowner c1\nhost     arp      flood    unicast\nc2       5s       50s      20s\nc3       35s      5s       50s\nnet1     35s      never    never\n",
+  ""
+ ],
+ "290": [
+  0,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, from ACTIVE\nc1       arp      seen at 0s\nc1       flood    seen at 0s\nc1       unicast  seen at 0s\nnet1     arp      seen at 0s\nc2       unicast  seen at 15s\nnet1     unicast  seen at 15s\nc2       flood    seen at 30s\nnet1     flood    seen at 30s\nowner c3\nhost     arp      flood    unicast\nc1       0s       0s       0s\nc2       n/a      30s      15s\nnet1     0s       30s      15s\n",
+  ""
+ ],
+ "291": [
+  1,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nc1       arp      seen at 0s\nc2       arp      seen at 0s\nc1       unicast  seen at 15s\nc2       flood    seen at 15s\nc3       flood    seen at 15s\nc3       unicast  seen at 15s\nport moved from net1 to c1 at 60s. Timing starts again.\nc2       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c1\nhost     arp      flood    unicast\nc2       0s       never    never\nc3       n/a      never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "292": [
+  2,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\nport moved from c2 to c3 at 0s. Timing starts again.\nc1       arp      seen at 0s\nc2       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c3\nhost     arp      flood    unicast\nc1       0s       never    never\nc2       0s       never    never\nnet1     0s       never    never\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "293": [
+  2,
+  "port fa:16:3e:00:00:09 fd00::5 on net1, vni 100, port age 0s\nc3       flood    seen at 0s\nc1       flood    seen at 15s\nc3       unicast  seen at 15s\nc1       unicast  seen at 45s\nowner net1\nhost     arp      flood    unicast\nc1       n/a      15s      45s\nc3       n/a      0s       15s\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "294": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc1       unicast  seen at 35s\nc3       arp      seen at 35s\nc3       flood    seen at 35s\nc1       arp      seen at 50s\nc1       flood    seen at 50s\nc3       unicast  seen at 50s\nowner c2\nhost     arp      flood    unicast\nc1       50s      50s      35s\nc3       35s      35s      50s\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "295": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "296": [
+  2,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\nc1       arp      seen at 0s\nc3       arp      seen at 0s\nowner c2\nhost     arp      flood    unicast\nc1       0s       never    never\nc3       0s       never    never\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "297": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "298": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nnet1     flood    seen at 5s\nnet1     arp      seen at 20s\nc3       arp      seen at 35s\nc1       arp      seen at 50s\nc3       unicast  seen at 50s\nnet1     unicast  seen at 50s\nowner c2\nhost     arp      flood    unicast\nc1       50s      never    never\nc3       35s      never    50s\nnet1     20s      5s       50s\n",
+  ""
+ ],
+ "299": [
+  "exit 2",
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\n",
+  "ERROR port owner c3 failed the preflight check: no sudo\n"
+ ],
+ "3": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc3       arp      seen at 20s\nport moved from c2 to c3 at 35s. Timing starts again.\nc2       arp      seen at 0s\nowner c3\nhost     arp      flood    unicast\nc2       0s       never    never\n",
+  "c1       ERROR preflight: no sudo\n"
+ ],
+ "30": [
+  2,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 fd00::5 on c3, vni 100, from ACTIVE\nport moved from c3 to net1 at 0s. Timing starts again.\nowner net1\nhost     arp      flood    unicast\nc1       n/a      never    never\nc3       n/a      never    never\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "31": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       flood    seen at 0s\nc2       unicast  seen at 0s\nc2       arp      seen at 15s\nc3       arp      seen at 15s\nc3       flood    seen at 15s\nnet1     arp      seen at 45s\nnet1     unicast  seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       15s      0s       0s\nc3       15s      15s      never\nnet1     45s      never    45s\n",
+  ""
+ ],
+ "32": [
+  1,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, from ACTIVE\nport moved from c1 to c2 at 0s. Timing starts again.\nc1       arp      seen at 0s\nc3       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c2\nhost     arp      flood    unicast\nc1       0s       never    never\nc3       0s       never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "33": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\n",
+  "ERROR port owner c2 failed the preflight check: no sudo\n"
+ ],
+ "34": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc2       arp      seen at 0s\nnet1     unicast  seen at 0s\nc1       flood    seen at 30s\nc1       unicast  seen at 30s\nnet1     arp      seen at 30s\nc1       arp      seen at 45s\nowner c3\nhost     arp      flood    unicast\nc1       45s      30s      30s\nc2       0s       never    never\nnet1     30s      never    0s\n",
+  ""
+ ],
+ "35": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "36": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc1       arp      seen at 15s\nport moved from c3 to net1 at 30s. Timing starts again.\nc1       arp      seen at 0s\nowner net1\nhost     arp      flood    unicast\nc1       0s       never    never\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "37": [
+  2,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, from ACTIVE\nc2       unicast  seen at 0s\nc3       arp      seen at 0s\nc3       flood    seen at 0s\nport moved from c1 to c2 at 15s. Timing starts again.\nc3       arp      seen at 0s\nowner c2\nhost     arp      flood    unicast\nc3       0s       never    never\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "38": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc1       arp      seen at 5s\nc1       unicast  seen at 20s\nc3       arp      seen at 35s\nc3       flood    seen at 35s\nowner net1\nhost     arp      flood    unicast\nc1       5s       never    20s\nc3       35s      35s      never\n",
+  ""
+ ],
+ "39": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc3       flood    seen at 5s\nc3       unicast  seen at 5s\nc3       arp      seen at 35s\nnet1     flood    seen at 35s\nnet1     arp      seen at 50s\nnet1     unicast  seen at 50s\nowner c2\nhost     arp      flood    unicast\nc3       35s      5s       5s\nnet1     50s      35s      50s\n",
+  "c1       ERROR preflight: no sudo\n"
+ ],
+ "4": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nnet1     flood    seen at 5s\nnet1     arp      seen at 20s\nc1       unicast  seen at 35s\nc3       flood    seen at 35s\nc3       unicast  seen at 35s\nnet1     unicast  seen at 35s\nc1       arp      seen at 50s\nport moved from c2 to c3 at 80s. Timing starts again.\nc1       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c3\nhost     arp      flood    unicast\nc1       0s       never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "40": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc3       flood    seen at 0s\nc1       arp      seen at 15s\nc3       arp      seen at 15s\nc3       unicast  seen at 15s\nc1       flood    seen at 30s\nc1       unicast  seen at 30s\nowner net1\nhost     arp      flood    unicast\nc1       15s      30s      30s\nc3       15s      0s       15s\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "41": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc2       flood    seen at 0s\nc3       arp      seen at 0s\nc2       unicast  seen at 15s\nc3       unicast  seen at 15s\nc1       flood    seen at 30s\nc1       unicast  seen at 45s\nc3       flood    seen at 45s\nowner net1\nhost     arp      flood    unicast\nc1       n/a      30s      45s\nc2       n/a      0s       15s\nc3       0s       45s      15s\n",
+  ""
+ ],
+ "42": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       flood    seen at 0s\nc2       unicast  seen at 0s\nc3       arp      seen at 0s\nnet1     unicast  seen at 0s\nc3       flood    seen at 15s\nc3       unicast  seen at 15s\nc2       arp      seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       45s      0s       0s\nc3       0s       15s      15s\nnet1     n/a      never    0s\n",
+  ""
+ ],
+ "43": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       flood    seen at 0s\nc3       unicast  seen at 30s\nc3       arp      seen at 45s\nnet1     unicast  seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       n/a      0s       never\nc3       45s      never    30s\nnet1     n/a      never    45s\n",
+  ""
+ ],
+ "44": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc1       flood    seen at 5s\nc2       arp      seen at 5s\nc2       flood    seen at 5s\nc1       arp      seen at 20s\nc2       unicast  seen at 20s\nc3       flood    seen at 35s\nc3       unicast  seen at 50s\nowner net1\nhost     arp      flood    unicast\nc1       20s      5s       never\nc2       5s       5s       20s\nc3       never    35s      50s\n",
+  ""
+ ],
+ "45": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc1       flood    seen at 0s\nc1       unicast  seen at 0s\nc2       flood    seen at 0s\nnet1     arp      seen at 15s\nnet1     unicast  seen at 15s\nc2       arp      seen at 30s\nc2       unicast  seen at 30s\nnet1     flood    seen at 30s\nc1       arp      seen at 45s\nowner c3\nhost     arp      flood    unicast\nc1       45s      0s       0s\nc2       30s      0s       30s\nnet1     15s      30s      15s\n",
+  ""
+ ],
+ "46": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 5s\nc2       arp      seen at 5s\nnet1     arp      seen at 5s\nc2       flood    seen at 20s\nc3       arp      seen at 35s\nc3       unicast  seen at 35s\nnet1     flood    seen at 50s\nnet1     unicast  seen at 50s\nowner c1\nhost     arp      flood    unicast\nc2       5s       20s      never\nc3       35s      never    35s\nnet1     5s       50s      50s\n",
+  ""
+ ],
+ "47": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc1       flood    seen at 0s\nc2       arp      seen at 0s\nc2       flood    seen at 0s\nc2       unicast  seen at 0s\nnet1     arp      seen at 0s\nport moved from c3 to net1 at 30s. Timing starts again.\nc2       arp      seen at 0s\nc3       arp      seen at 0s\nowner net1\nhost     arp      flood    unicast\nc1       never    never    never\nc2       0s       never    never\nc3       0s       never    never\n",
+  ""
+ ],
+ "48": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc1       flood    seen at 0s\nnet1     unicast  seen at 0s\nc1       arp      seen at 15s\nc2       arp      seen at 15s\nc2       flood    seen at 15s\nnet1     flood    seen at 15s\nc1       unicast  seen at 45s\nnet1     arp      seen at 45s\nowner c3\nhost     arp      flood    unicast\nc1       15s      0s       45s\nc2       15s      15s      never\nnet1     45s      15s      0s\n",
+  ""
+ ],
+ "49": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       flood    seen at 0s\nc3       flood    seen at 15s\nport moved from c1 to c2 at 30s. Timing starts again.\nc1       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c2\nhost     arp      flood    unicast\nc1       0s       never    never\nc3       n/a      never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "5": [
+  2,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, from ACTIVE\nc2       flood    seen at 0s\nnet1     arp      seen at 0s\nnet1     flood    seen at 0s\nnet1     unicast  seen at 0s\nc2       arp      seen at 30s\nc2       unicast  seen at 30s\nowner c3\nhost     arp      flood    unicast\nc2       30s      0s       30s\nnet1     0s       0s       0s\n",
+  "c1       ERROR preflight: no sudo\n"
+ ],
+ "50": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "51": [
+  2,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\nnet1     arp      seen at 0s\nnet1     unicast  seen at 0s\nnet1     flood    seen at 15s\nowner c2\nhost     arp      flood    unicast\nnet1     0s       15s      0s\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "52": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc2       flood    seen at 0s\nc2       unicast  seen at 0s\nnet1     arp      seen at 0s\nnet1     unicast  seen at 0s\nc1       flood    seen at 15s\nnet1     flood    seen at 15s\nport moved from c3 to net1 at 30s. Timing starts again.\nc1       arp      seen at 15s\nc2       arp      seen at 15s\nowner net1\nhost     arp      flood    unicast\nc1       15s      never    never\nc2       15s      never    never\nc3       never    never    never\n",
+  ""
+ ],
+ "53": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 0s\nc1       arp      seen at 0s\nc3       flood    seen at 0s\nc1       flood    seen at 15s\nc3       arp      seen at 15s\nnet1     arp      seen at 15s\nnet1     unicast  seen at 15s\nport moved from c2 to c3 at 30s. Timing starts again.\nc1       arp      seen at 0s\nc2       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c3\nhost     arp      flood    unicast\nc1       0s       never    never\nc2       0s       never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "54": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc3       flood    seen at 5s\nc1       arp      seen at 20s\nc3       arp      seen at 20s\nc1       unicast  seen at 35s\nc1       flood    seen at 50s\nc3       unicast  seen at 50s\nnet1     flood    seen at 50s\nport moved from c2 to c3 at 80s. Timing starts again.\nc1       arp      seen at 0s\nowner c3\nhost     arp      flood    unicast\nc1       0s       never    never\nc2       never    never    never\nnet1     n/a      never    never\n",
+  ""
+ ],
+ "55": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, from ACTIVE\nc2       arp      seen at 0s\nnet1     flood    seen at 0s\nc2       flood    seen at 15s\nc3       arp      seen at 15s\nc3       flood    seen at 15s\nnet1     arp      seen at 15s\nnet1     unicast  seen at 15s\nowner c1\nhost     arp      flood    unicast\nc2       0s       15s      never\nc3       15s      15s      never\nnet1     15s      0s       15s\n",
+  ""
+ ],
+ "56": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nnet1     arp      seen at 0s\nc2       unicast  seen at 15s\nc2       arp      seen at 30s\nowner c1\nhost     arp      flood    unicast\nc2       30s      never    15s\nnet1     0s       never    never\n",
+  ""
+ ],
+ "57": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nnet1     arp      seen at 0s\nc2       arp      seen at 15s\nc3       arp      seen at 30s\nc3       flood    seen at 45s\nc3       unicast  seen at 45s\nnet1     unicast  seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       15s      never    never\nc3       30s      45s      45s\nnet1     0s       never    45s\n",
+  ""
+ ],
+ "58": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 0s\nc3       flood    seen at 0s\nc3       unicast  seen at 0s\nnet1     flood    seen at 15s\nc1       arp      seen at 30s\nc1       flood    seen at 30s\nc1       unicast  seen at 45s\nnet1     arp      seen at 45s\nnet1     unicast  seen at 45s\nowner c2\nhost     arp      flood    unicast\nc1       30s      30s      45s\nc3       n/a      0s       0s\nnet1     45s      15s      45s\n",
+  ""
+ ],
+ "59": [
+  2,
+  "port fa:16:3e:00:00:09 fd00::5 on c2, vni 100, port age 5s\nc3       flood    seen at 20s\nnet1     flood    seen at 20s\nowner c2\nhost     arp      flood    unicast\nc3       n/a      20s      never\nnet1     n/a      20s      never\n",
+  "c1       ERROR preflight: no sudo\n"
+ ],
+ "6": [
+  2,
+  "port fa:16:3e:00:00:09 fd00::5 on c1, vni 100, port age 5s\nc2       unicast  seen at 20s\nc2       flood    seen at 50s\nowner c1\nhost     arp      flood    unicast\nc2       n/a      50s      20s\nc3       n/a      never    never\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "60": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nc1       flood    seen at 5s\nc1       unicast  seen at 5s\nc2       arp      seen at 20s\nc2       flood    seen at 20s\nnet1     flood    seen at 20s\nnet1     unicast  seen at 20s\nport moved from c3 to net1 at 35s. Timing starts again.\nc1       arp      seen at 0s\nc2       arp      seen at 0s\nc3       arp      seen at 0s\nowner net1\nhost     arp      flood    unicast\nc1       0s       never    never\nc2       0s       never    never\nc3       0s       never    never\n",
+  ""
+ ],
+ "61": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc2       arp      seen at 5s\nc3       flood    seen at 20s\nport moved from net1 to c1 at 35s. Timing starts again.\nc2       arp      seen at 0s\nc3       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c1\nhost     arp      flood    unicast\nc2       0s       never    never\nc3       0s       never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "62": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc1       arp      seen at 20s\nc1       unicast  seen at 20s\nnet1     arp      seen at 50s\nnet1     flood    seen at 50s\nport moved from c2 to c3 at 80s. Timing starts again.\nc1       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c3\nhost     arp      flood    unicast\nc1       0s       never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "63": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc2       arp      seen at 0s\nc3       arp      seen at 0s\nc3       flood    seen at 15s\nc3       unicast  seen at 15s\nc2       flood    seen at 30s\nowner net1\nhost     arp      flood    unicast\nc2       0s       30s      never\nc3       0s       15s      15s\n",
+  "c1       ERROR preflight: no sudo\n"
+ ],
+ "64": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc1       flood    seen at 5s\nc3       arp      seen at 5s\nc3       unicast  seen at 5s\nc1       arp      seen at 20s\nc1       unicast  seen at 50s\nc3       flood    seen at 50s\nowner net1\nhost     arp      flood    unicast\nc1       20s      5s       50s\nc3       5s       50s      5s\n",
+  "c2       ERROR preflight: no sudo\n"
+ ],
+ "65": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc1       unicast  seen at 5s\nc1       flood    seen at 20s\nc2       unicast  seen at 35s\nc1       arp      seen at 50s\nc2       flood    seen at 50s\nport moved from net1 to c1 at 80s. Timing starts again.\nnet1     arp      seen at 0s\nowner c1\nhost     arp      flood    unicast\nc2       never    never    never\nnet1     0s       never    never\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "66": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       unicast  seen at 0s\nnet1     unicast  seen at 0s\nc2       flood    seen at 15s\nnet1     arp      seen at 45s\nport moved from c1 to c2 at 75s. Timing starts again.\nc1       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c2\nhost     arp      flood    unicast\nc1       0s       never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "67": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nc2       flood    seen at 0s\nc3       flood    seen at 0s\nnet1     unicast  seen at 0s\nc2       arp      seen at 15s\nc2       unicast  seen at 15s\nc3       unicast  seen at 15s\nnet1     flood    seen at 15s\nowner c1\nhost     arp      flood    unicast\nc2       15s      0s       15s\nc3       n/a      0s       15s\nnet1     n/a      15s      0s\n",
+  ""
+ ],
+ "68": [
+  2,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nc2       arp      seen at 0s\nc2       unicast  seen at 0s\nc1       unicast  seen at 15s\nc1       arp      seen at 30s\nowner net1\nhost     arp      flood    unicast\nc1       30s      never    15s\nc2       0s       never    0s\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "69": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 5s\nc2       unicast  seen at 35s\nc2       arp      seen at 50s\nc3       unicast  seen at 50s\nowner c1\nhost     arp      flood    unicast\nc2       50s      never    35s\nc3       n/a      never    50s\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "7": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "70": [
+  1,
+  "port fa:16:3e:00:00:09 fd00::5 on c1, vni 100, port age 0s\nc2       flood    seen at 15s\nc3       unicast  seen at 30s\nc2       unicast  seen at 45s\nnet1     flood    seen at 45s\nnet1     unicast  seen at 45s\nport moved from c1 to c2 at 75s. Timing starts again.\nowner c2\nhost     arp      flood    unicast\nc3       n/a      never    never\nnet1     n/a      never    never\n",
+  ""
+ ],
+ "71": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc1       arp      seen at 0s\nc2       arp      seen at 0s\nc1       flood    seen at 15s\nc2       unicast  seen at 15s\nnet1     unicast  seen at 15s\nport moved from c3 to net1 at 30s. Timing starts again.\nc1       arp      seen at 0s\nc2       arp      seen at 0s\nowner net1\nhost     arp      flood    unicast\nc1       0s       never    never\nc2       0s       never    never\nc3       never    never    never\n",
+  ""
+ ],
+ "72": [
+  1,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, from ACTIVE\nport moved from c1 to c2 at 0s. Timing starts again.\nc1       arp      seen at 0s\nc3       arp      seen at 0s\nnet1     arp      seen at 15s\nowner c2\nhost     arp      flood    unicast\nc1       0s       never    never\nc3       0s       never    never\nnet1     15s      never    never\n",
+  ""
+ ],
+ "73": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nnet1     flood    seen at 0s\nc2       flood    seen at 15s\nc1       arp      seen at 45s\nc1       flood    seen at 45s\nc2       unicast  seen at 45s\nnet1     arp      seen at 45s\nnet1     unicast  seen at 45s\nowner c3\nhost     arp      flood    unicast\nc1       45s      45s      never\nc2       n/a      15s      45s\nnet1     45s      0s       45s\n",
+  ""
+ ],
+ "74": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nnet1     unicast  seen at 0s\nc2       flood    seen at 30s\nc2       unicast  seen at 45s\nowner c1\nhost     arp      flood    unicast\nc2       never    30s      45s\nnet1     never    never    0s\n",
+  ""
+ ],
+ "75": [
+  "exit 2",
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\n",
+  "ERROR port owner net1 failed the preflight check: no sudo\n"
+ ],
+ "76": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nc1       arp      seen at 20s\nc2       unicast  seen at 20s\nnet1     arp      seen at 20s\nc1       flood    seen at 35s\nc1       unicast  seen at 35s\nnet1     flood    seen at 35s\nc2       arp      seen at 50s\nc2       flood    seen at 50s\nowner c3\nhost     arp      flood    unicast\nc1       20s      35s      35s\nc2       50s      50s      20s\nnet1     20s      35s      never\n",
+  ""
+ ],
+ "77": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nnet1     arp      seen at 0s\nc2       arp      seen at 15s\nc2       flood    seen at 15s\nnet1     unicast  seen at 15s\nc1       arp      seen at 45s\nnet1     flood    seen at 45s\nowner c3\nhost     arp      flood    unicast\nc1       45s      never    never\nc2       15s      15s      never\nnet1     0s       45s      15s\n",
+  ""
+ ],
+ "78": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc1       flood    seen at 20s\nc3       arp      seen at 20s\nc3       flood    seen at 20s\nc3       unicast  seen at 35s\nc1       arp      seen at 50s\nc1       unicast  seen at 50s\nowner c2\nhost     arp      flood    unicast\nc1       50s      20s      50s\nc3       20s      20s      35s\n",
+  ""
+ ],
+ "79": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 0s\nc1       flood    seen at 0s\nc1       arp      seen at 15s\nc3       unicast  seen at 15s\nc1       unicast  seen at 30s\nc3       flood    seen at 30s\nnet1     unicast  seen at 30s\nc3       arp      seen at 45s\nnet1     arp      seen at 45s\nnet1     flood    seen at 45s\nowner c2\nhost     arp      flood    unicast\nc1       15s      0s       30s\nc3       45s      30s      15s\nnet1     45s      45s      30s\n",
+  ""
+ ],
+ "8": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc1       arp      seen at 20s\nc1       flood    seen at 20s\nc3       arp      seen at 50s\nc3       flood    seen at 50s\nc3       unicast  seen at 50s\nnet1     arp      seen at 50s\nnet1     flood    seen at 50s\nowner c2\nhost     arp      flood    unicast\nc1       20s      20s      never\nc3       50s      50s      50s\nnet1     50s      50s      never\n",
+  ""
+ ],
+ "80": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 0s\nc1       arp      seen at 0s\nc2       unicast  seen at 0s\nnet1     unicast  seen at 0s\nc2       arp      seen at 15s\nport moved from c3 to net1 at 30s. Timing starts again.\nc1       arp      seen at 0s\nc2       arp      seen at 0s\nowner net1\nhost     arp      flood    unicast\nc1       0s       never    never\nc2       0s       never    never\n",
+  ""
+ ],
+ "81": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc1       unicast  seen at 0s\nc3       arp      seen at 15s\nc3       unicast  seen at 15s\nc2       arp      seen at 30s\nc2       flood    seen at 30s\nc2       unicast  seen at 30s\nc3       flood    seen at 30s\nc1       arp      seen at 45s\nport moved from net1 to c1 at 75s. Timing starts again.\nc2       arp      seen at 0s\nc3       arp      seen at 0s\nowner c1\nhost     arp      flood    unicast\nc2       0s       never    never\nc3       0s       never    never\n",
+  ""
+ ],
+ "82": [
+  1,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\nc1       arp      seen at 0s\nc1       flood    seen at 0s\nc1       unicast  seen at 0s\nc3       arp      seen at 0s\nc3       flood    seen at 0s\nnet1     arp      seen at 0s\nnet1     flood    seen at 0s\nnet1     unicast  seen at 0s\nowner c2\nhost     arp      flood    unicast\nc1       0s       0s       0s\nc3       0s       0s       never\nnet1     0s       0s       0s\n",
+  ""
+ ],
+ "83": [
+  "exit 2",
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "84": [
+  1,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 fd00::5 on c3, vni 100, from ACTIVE\nc2       flood    seen at 15s\nnet1     flood    seen at 30s\nnet1     unicast  seen at 30s\nport moved from c3 to net1 at 60s. Timing starts again.\nowner net1\nhost     arp      flood    unicast\nc2       n/a      never    never\nc3       n/a      never    never\n",
+  ""
+ ],
+ "85": [
+  1,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\nc3       flood    seen at 0s\nport moved from c2 to c3 at 15s. Timing starts again.\nc2       arp      seen at 0s\nc1       arp      seen at 15s\nowner c3\nhost     arp      flood    unicast\nc1       15s      never    never\nc2       0s       never    never\nnet1     never    never    never\n",
+  ""
+ ],
+ "86": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nowner c1\nhost     arp      flood    unicast\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "87": [
+  2,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\nnet1     arp      seen at 0s\nnet1     flood    seen at 0s\nport moved from c2 to c3 at 15s. Timing starts again.\nc2       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c3\nhost     arp      flood    unicast\nc2       0s       never    never\nnet1     0s       never    never\n",
+  "c3       ERROR preflight: no sudo\n"
+ ],
+ "88": [
+  2,
+  "waiting up to 120s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, from ACTIVE\nc2       arp      seen at 0s\nc2       flood    seen at 0s\nc2       unicast  seen at 0s\nc3       flood    seen at 0s\nc3       unicast  seen at 0s\nowner net1\nhost     arp      flood    unicast\nc2       0s       0s       0s\nc3       n/a      0s       0s\n",
+  "c1       ERROR preflight: no sudo\n"
+ ],
+ "89": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "9": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "90": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "91": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c1, vni 100, port age 0s\nnet1     unicast  seen at 0s\nc2       arp      seen at 15s\nc2       flood    seen at 15s\nnet1     arp      seen at 15s\nnet1     flood    seen at 45s\nport moved from c1 to c2 at 75s. Timing starts again.\nc1       arp      seen at 0s\nnet1     arp      seen at 0s\nowner c2\nhost     arp      flood    unicast\nc1       0s       never    never\nnet1     0s       never    never\n",
+  ""
+ ],
+ "92": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 0s\nc1       arp      seen at 0s\nc2       arp      seen at 0s\nc2       flood    seen at 0s\nc2       unicast  seen at 0s\nc3       arp      seen at 15s\nc3       unicast  seen at 15s\nc1       unicast  seen at 30s\nowner net1\nhost     arp      flood    unicast\nc1       0s       never    30s\nc2       0s       0s       0s\nc3       15s      never    15s\n",
+  ""
+ ],
+ "93": [
+  "exit 2",
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\n",
+  "ERROR fa:16:3e:00:00:09 did not become ACTIVE on a host\n"
+ ],
+ "94": [
+  2,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 5s\nc3       arp      seen at 5s\nc3       unicast  seen at 5s\nport moved from c2 to c3 at 35s. Timing starts again.\nc1       arp      seen at 0s\nowner c3\nhost     arp      flood    unicast\nc1       0s       never    never\nc2       n/a      never    never\n",
+  "net1     ERROR preflight: no sudo\n"
+ ],
+ "95": [
+  0,
+  "waiting up to 60s for fa:16:3e:00:00:09 to become ACTIVE on a host\nport fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, from ACTIVE\nc1       flood    seen at 0s\nc1       unicast  seen at 0s\nc1       arp      seen at 15s\nnet1     arp      seen at 15s\nnet1     unicast  seen at 15s\nnet1     flood    seen at 30s\nowner c2\nhost     arp      flood    unicast\nc1       15s      0s       0s\nnet1     15s      30s      15s\n",
+  ""
+ ],
+ "96": [
+  1,
+  "port fa:16:3e:00:00:09 fd00::5 on c3, vni 100, port age 5s\nc2       flood    seen at 5s\nnet1     unicast  seen at 5s\nc1       flood    seen at 20s\nc2       unicast  seen at 35s\nc1       unicast  seen at 50s\nowner c3\nhost     arp      flood    unicast\nc1       n/a      20s      50s\nc2       n/a      5s       35s\nnet1     n/a      never    5s\n",
+  ""
+ ],
+ "97": [
+  0,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c2, vni 100, port age 0s\nc1       arp      seen at 0s\nc3       flood    seen at 0s\nc1       flood    seen at 30s\nc1       unicast  seen at 30s\nc3       unicast  seen at 30s\nowner c2\nhost     arp      flood    unicast\nc1       0s       30s      30s\nc3       n/a      0s       30s\n",
+  ""
+ ],
+ "98": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on c3, vni 100, port age 5s\nc1       flood    seen at 5s\nc2       unicast  seen at 5s\nc2       arp      seen at 20s\nport moved from c3 to net1 at 35s. Timing starts again.\nc2       arp      seen at 0s\nowner net1\nhost     arp      flood    unicast\nc1       n/a      never    never\nc2       0s       never    never\n",
+  ""
+ ],
+ "99": [
+  1,
+  "port fa:16:3e:00:00:09 10.0.0.5 on net1, vni 100, port age 5s\nc3       arp      seen at 20s\nc1       arp      seen at 50s\nc3       flood    seen at 50s\nowner net1\nhost     arp      flood    unicast\nc1       50s      never    never\nc3       20s      50s      never\n",
+  ""
+ ]
+}

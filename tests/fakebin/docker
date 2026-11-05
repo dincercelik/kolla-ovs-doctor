@@ -1,0 +1,11 @@
+#!/bin/bash
+# Fake docker: "exec [-i] [-u user] NAME CMD..." runs CMD here; ps/inspect print fixtures.
+case "$1" in
+  exec) shift
+        while [ "${1#-}" != "$1" ]; do [ "$1" = -u ] && shift; shift; done
+        shift; exec "$@" ;;
+  ps) echo neutron_l3_agent ;;
+  inspect) echo "/neutron_openvswitch_agent kolla/neutron-openvswitch-agent:2025.1"
+           echo "/openvswitch_db kolla/openvswitch-db-server:2025.1"
+           echo "/openvswitch_vswitchd kolla/openvswitch-vswitchd:2025.1" ;;
+esac

@@ -1,0 +1,39 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=77"]
+
+[project]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Topic :: System :: Networking",
+    "Topic :: System :: Systems Administration",
+]
+dependencies = ["openstacksdk>=1.0"]
+description = "Check and repair Neutron ML2/OVS state on Kolla-Ansible clouds"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+name = "kolla-ovs-doctor"
+readme = "README.md"
+requires-python = ">=3.9"
+version = "0.1.0"
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[project.scripts]
+ovs-doctor = "kolla_ovs_doctor.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 99
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

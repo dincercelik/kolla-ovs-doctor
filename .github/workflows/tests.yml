@@ -1,0 +1,103 @@
+# Lint, test on every supported Python, build the package, and check that it installs
+# next to Kolla-Ansible without changing Kolla-Ansible's packages.
+# The jobs use ubuntu-24.04, not ubuntu-latest: setup-python has no Python 3.9 for
+# Ubuntu 26.04, which ubuntu-latest now points to.
+name: tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Build the sdist and the wheel
+        run: |
+          python -m pip install build
+          python -m build
+      - name: Install the wheel and run the command
+        run: |
+          python -m venv /tmp/wheel-venv
+          /tmp/wheel-venv/bin/pip install dist/*.whl
+          /tmp/wheel-venv/bin/ovs-doctor --version
+          /tmp/wheel-venv/bin/python -m kolla_ovs_doctor --help > /dev/null
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  kolla-ansible:
+    name: install next to kolla-ansible
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install kolla-ansible into a new venv
+        run: |
+          python -m venv /tmp/kolla-venv
+          /tmp/kolla-venv/bin/pip install kolla-ansible
+          /tmp/kolla-venv/bin/pip freeze > /tmp/before.txt
+      - name: Install kolla-ovs-doctor into the same venv
+        run: /tmp/kolla-venv/bin/pip install .
+      - name: Check that no kolla-ansible package changed
+        run: |
+          /tmp/kolla-venv/bin/pip check
+          /tmp/kolla-venv/bin/pip freeze > /tmp/after.txt
+          # Lines that were in the venv before and are now gone or changed.
+          changed=$(comm -23 <(sort /tmp/before.txt) <(sort /tmp/after.txt))
+          if [ -n "$changed" ]; then
+            echo "Installing kolla-ovs-doctor changed these packages:"
+            echo "$changed"
+            exit 1
+          fi
+          /tmp/kolla-venv/bin/kolla-ansible --version
+          /tmp/kolla-venv/bin/ovs-doctor --version
+
+  lint:
+    name: lint
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Run ruff
+        run: |
+          python -m pip install ruff
+          ruff check .
+
+  test:
+    name: test (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          cache: pip
+          cache-dependency-path: pyproject.toml
+          python-version: ${{ matrix.python-version }}
+      - name: Install the package with test extras
+        run: python -m pip install -e '.[test]'
+      - name: Run pytest
+        run: python -m pytest -p no:cacheprovider

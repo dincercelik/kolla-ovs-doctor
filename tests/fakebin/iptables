@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "-A neutron-l3-agent-snat -o qg-1 -j SNAT --to-source 203.0.113.5"
+echo "-A neutron-l3-agent-POSTROUTING -j ACCEPT"

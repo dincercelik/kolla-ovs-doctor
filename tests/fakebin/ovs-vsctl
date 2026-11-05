@@ -1,0 +1,5 @@
+#!/bin/bash
+case "$*" in
+  *"list port"*) echo 3 ;;
+  *) echo "ofport              : 2"; echo 'options             : {remote_ip="192.0.2.9"}' ;;
+esac

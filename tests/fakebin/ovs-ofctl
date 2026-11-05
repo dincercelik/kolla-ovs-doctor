@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "ofctl-args: $*" >&2
+case "$*" in
+  *dump-aggregate*) echo "NXST_AGGREGATE reply (xid=0x4): packet_count=0 byte_count=0 flow_count=3" ;;
+  *"dump-flows br-tun table=4"*) echo " cookie=0x1, table=4, priority=1,tun_id=0x64 actions=mod_vlan_vid:3,resubmit(,10)" ;;
+  *"dump-flows br-tun table=20,dl_dst="*) echo " cookie=0x1, table=20, priority=2,dl_vlan=3,dl_dst=${4#*dl_dst=} actions=strip_vlan,load:0x64->NXM_NX_TUN_ID[],output:2" ;;
+  *"dump-flows br-tun table=21,arp,arp_tpa="*) echo " cookie=0x1, table=21, priority=1,arp,dl_vlan=3,arp_tpa=${4#*arp_tpa=} actions=mod_dl_src:fa:16:3e:00:00:09,IN_PORT" ;;
+  *"dump-flows br-tun table=22"*) echo " cookie=0x1, table=22, priority=1,dl_vlan=3 actions=strip_vlan,load:0x64->NXM_NX_TUN_ID[],output:2" ;;
+  *"dump-flows br-tun") echo "NXST_FLOW reply (xid=0x4):"
+      echo " cookie=0x1, table=4, priority=1,tun_id=0x64 actions=mod_vlan_vid:3,resubmit(,10)"
+      echo " cookie=0x1, table=22, priority=1,dl_vlan=3 actions=strip_vlan,load:0x64->NXM_NX_TUN_ID[],output:2" ;;
+esac
