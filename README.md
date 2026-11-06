@@ -52,6 +52,17 @@ OVS host, and that sudo works without a password.
 
 See `ovs-doctor --help` for all options.
 
+## SSH
+
+ovs-doctor connects with Paramiko, one connection per host for the whole run.
+
+- From `~/.ssh/config` it reads `HostName`, `User`, `Port` and `IdentityFile`.
+  `--ssh-user` wins over `User`.
+- It logs in with your ssh-agent or your key files.
+- A host key must already be in `~/.ssh/known_hosts` or
+  `/etc/ssh/ssh_known_hosts`. An unknown host is refused, not added.
+- Jump hosts (`ProxyJump`, `ProxyCommand`) are not supported.
+
 ## Exit codes
 
 - `0`: no problems found

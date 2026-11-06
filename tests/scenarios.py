@@ -300,7 +300,6 @@ def run_main(monkeypatch, seed, tmp):
     monkeypatch.setattr(remote, "preflight", fake_preflight(bad))
     monkeypatch.setattr(util, "run_parallel", sequential)
     monkeypatch.setattr(remote, "run_ssh", run_ssh)
-    monkeypatch.setattr(remote, "ssh_control_dir", lambda: tmp)
     monkeypatch.setattr(sys, "argv", ["ovs-doctor"] + [arg.format(tmp=tmp) for arg in argv])
     code, out, err = capture(cli.main)
     files = {}

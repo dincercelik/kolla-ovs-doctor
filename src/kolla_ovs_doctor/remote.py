@@ -1,16 +1,20 @@
-"""Run scripts on the hosts over SSH, under one sudo per script."""
+"""Run scripts on the hosts over SSH with Paramiko, under one sudo per script."""
 import atexit
-import functools
+import getpass
 import os
 import re
-import shutil
-import subprocess
+import select
 import sys
-import tempfile
+import time
+
+import paramiko
 
 from kolla_ovs_doctor import parse, scripts, util
 
 DEFAULT_BACKUP_DIR = "/var/backups/kolla-ovs-doctor"
+# One open SSH client per (host, user) for the whole run. Calls to one host never
+# overlap, so this needs no lock.
+_CLIENTS = {}
 
 
 def split_sections(text):
@@ -26,16 +30,6 @@ def split_sections(text):
     return {name: "\n".join(lines) for name, lines in sections.items()}
 
 
-@functools.cache
-def ssh_control_dir():
-    """Return a private directory for SSH control sockets, removed at exit."""
-    # /tmp keeps the path short. A Unix socket path can be about 104 bytes at most.
-    base = "/tmp" if os.path.isdir("/tmp") else None
-    path = tempfile.mkdtemp(dir=base, prefix="ovs-doctor-ssh-")
-    atexit.register(shutil.rmtree, path, ignore_errors=True)
-    return path
-
-
 class RemoteError(RuntimeError):
     """A remote script failed. Exit code 255 means SSH itself failed."""
 
@@ -44,20 +38,99 @@ class RemoteError(RuntimeError):
         self.returncode = returncode
 
 
+def ssh_options(host, user):
+    """Return the Paramiko connect options for host, from ~/.ssh/config and --ssh-user."""
+    path = os.path.expanduser("~/.ssh/config")
+    config = paramiko.SSHConfig.from_path(path) if os.path.exists(path) else paramiko.SSHConfig()
+    found = config.lookup(host)
+    if "proxycommand" in found or "proxyjump" in found:
+        raise RemoteError(f"ssh: {host} needs ProxyJump or ProxyCommand, and jump hosts are "
+                          f"not supported", 255)
+    options = {"hostname": found.get("hostname", host), "port": int(found.get("port", 22)),
+               "username": user or found.get("user") or getpass.getuser()}
+    if "identityfile" in found:
+        options["key_filename"] = found["identityfile"]
+    return options
+
+
+def connect(host, user, timeout):
+    """Open an SSH connection to host. A host key that is not in known_hosts is refused."""
+    client = paramiko.SSHClient()
+    for path in (os.path.expanduser("~/.ssh/known_hosts"), "/etc/ssh/ssh_known_hosts"):
+        if os.path.exists(path):
+            client.load_system_host_keys(path)
+    client.set_missing_host_key_policy(paramiko.RejectPolicy())
+    client.connect(allow_agent=True, auth_timeout=timeout, banner_timeout=timeout,
+                   look_for_keys=True, timeout=timeout, **ssh_options(host, user))
+    client.get_transport().set_keepalive(30)
+    return client
+
+
+def client_for(host, user, timeout):
+    """Return the open SSH client for host. Connect first if there is none, or it closed."""
+    client = _CLIENTS.get((host, user))
+    transport = client.get_transport() if client else None
+    if transport is None or not transport.is_active():
+        client = _CLIENTS[(host, user)] = connect(host, user, timeout)
+    return client
+
+
+def open_channel(host, user, timeout):
+    """Open a session channel to host. If the open connection was dropped, connect once more."""
+    was_open = (host, user) in _CLIENTS
+    try:
+        return client_for(host, user, timeout).get_transport().open_session(timeout=timeout)
+    except (EOFError, OSError, paramiko.SSHException):
+        if not was_open:
+            raise
+        _CLIENTS.pop((host, user)).close()
+        return client_for(host, user, timeout).get_transport().open_session(timeout=timeout)
+
+
+def close_clients():
+    """Close every open SSH client."""
+    for client in _CLIENTS.values():
+        client.close()
+    _CLIENTS.clear()
+
+
+atexit.register(close_clients)
+
+
+def read_channel(channel, deadline):
+    """Read stdout and stderr together until the command ends. Return both as text."""
+    out, err = [], []
+    while True:
+        if channel.recv_ready():
+            out.append(channel.recv(65536))
+        elif channel.recv_stderr_ready():
+            err.append(channel.recv_stderr(65536))
+        elif channel.eof_received or channel.closed:
+            break
+        elif time.monotonic() >= deadline:
+            raise RemoteError("ssh: the host did not finish in time", 255)
+        else:
+            # The channel only signals stdout, so wake up often enough for stderr too.
+            select.select([channel], [], [], 0.05)
+    return (b"".join(out).decode(errors="replace"), b"".join(err).decode(errors="replace"))
+
+
 def run_ssh(host, user, timeout, script):
     """Run a script on a host as root, with one sudo for the whole script."""
-    target = f"{user}@{host}" if user else host
-    # All calls to a host share one SSH connection. It closes 60s after the last call.
-    command = ["ssh", "-o", "BatchMode=yes", "-o", f"ConnectTimeout={timeout}",
-               "-o", "ControlMaster=auto", "-o", f"ControlPath={ssh_control_dir()}/%C",
-               "-o", "ControlPersist=60",
-               target, "sudo", "-n", "bash", "-s"]
-    result = subprocess.run(command, capture_output=True, check=False, input=script,
-                            text=True, timeout=timeout + 120)
-    if result.returncode != 0:
-        raise RemoteError(result.stderr.strip() or f"ssh exit {result.returncode}",
-                          result.returncode)
-    return result.stdout
+    deadline = time.monotonic() + timeout + 120
+    try:
+        channel = open_channel(host, user, timeout)
+        with channel:
+            channel.exec_command("sudo -n bash -s")
+            channel.sendall(script.encode())
+            channel.shutdown_write()
+            out, err = read_channel(channel, deadline)
+            code = channel.recv_exit_status()
+    except (EOFError, OSError, paramiko.SSHException) as exc:
+        raise RemoteError(f"ssh: {exc or type(exc).__name__}", 255) from exc
+    if code != 0:
+        raise RemoteError(err.strip() or f"ssh exit {code}", code)
+    return out
 
 
 def parse_preflight(text):

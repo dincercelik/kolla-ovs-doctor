@@ -9,7 +9,9 @@ Neutron does not know. A full run also does these checks (see --checks):
 A host whose OVS agent is down is reported as agent_down. It is not checked.
 
 Run it on a host with SSH key access to the hypervisors. Load admin
-credentials first (source admin-openrc.sh).
+credentials first (source admin-openrc.sh). SSH reads HostName, User, Port and
+IdentityFile from ~/.ssh/config. Host keys must be in known_hosts. Jump hosts
+(ProxyJump, ProxyCommand) are not supported.
 
 It works only on Kolla-Ansible clouds that use Docker. Before it runs anything
 on a host, it checks two things. The host must be a Kolla-Ansible OVS host. The
@@ -192,7 +194,6 @@ def audit_all(state):
 def main():
     """Run the tool and return its exit code."""
     args, checks = parse_args()
-    remote.ssh_control_dir()  # Make it once, before threads use it.
     try:
         networks, ports, tunnel_ips, ip_hosts = neutron.collect_neutron()
     except Exception as exc:  # Missing credentials, Keystone down, and so on.
