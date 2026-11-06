@@ -3,7 +3,7 @@ import sys
 
 import pytest
 
-from kolla_ovs_doctor import cli
+from kolla_ovs_doctor import cli, remote
 
 
 def pytest_addoption(parser):
@@ -26,7 +26,7 @@ def ssh_scripts(monkeypatch):
         scripts[host] = script
         return "/x\n"
 
-    monkeypatch.setattr(cli, "run_ssh", fake)
+    monkeypatch.setattr(remote, "run_ssh", fake)
     return scripts
 
 

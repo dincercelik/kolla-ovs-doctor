@@ -26,6 +26,10 @@ test = ["pytest"]
 [project.scripts]
 ovs-doctor = "kolla_ovs_doctor.cli:main"
 
+[tool.isort]
+line_length = 99
+profile = "black"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 

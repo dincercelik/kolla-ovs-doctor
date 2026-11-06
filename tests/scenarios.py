@@ -1,6 +1,6 @@
 """Random but seeded clouds for the golden tests.
 
-Each run_* function patches cli with fakes, runs one part of the tool and returns
+Each run_* function patches the package with fakes, runs one part of the tool and returns
 everything it printed or returned, as plain JSON data.
 """
 import contextlib
@@ -11,7 +11,7 @@ import random
 import sys
 import types
 
-from kolla_ovs_doctor import cli
+from kolla_ovs_doctor import checks, cli, fdb_watch, neutron, remote, util
 
 HOSTS = ["c1", "c2", "c3", "net1"]
 IPS = {host: f"192.0.2.{n + 1}" for n, host in enumerate(HOSTS)}
@@ -23,7 +23,7 @@ MAIN_OPTIONS = [[], ["--fix"], ["--fix", "--dry-run"], ["--cleanup"], ["--cleanu
 
 
 def call(func, host):
-    """Run func(host) like cli.run_parallel does, but in this thread."""
+    """Run func(host) like util.run_parallel does, but in this thread."""
     try:
         return func(host), None
     except Exception as exc:  # The tool records the error per host.
@@ -107,7 +107,7 @@ def namespace(rng, number, gateway):
 
 def run_routers(seed):
     """Return the sorted findings of audit_routers for one random setup."""
-    findings = cli.audit_routers(*router_case(seed))
+    findings = checks.routers.audit_routers(*router_case(seed))
     return sorted(sorted(item.items()) for item in findings)
 
 
@@ -156,7 +156,7 @@ def run_fdb_watch(monkeypatch, seed):
 
     bad = set(rng.sample(HOSTS, rng.choice([0, 0, 1])))
     arrive = {(host, entry): rng.choice([0, 15, 30, 45, 10**9])
-              for host in HOSTS for entry in cli.FDB_ENTRIES}
+              for host in HOSTS for entry in fdb_watch.FDB_ENTRIES}
     has_vni = {host: rng.random() < 0.85 for host in HOSTS}
     arp_on = {host: rng.random() < 0.7 for host in HOSTS}
     flaky = {host: rng.random() < 0.15 for host in HOSTS}
@@ -171,17 +171,17 @@ def run_fdb_watch(monkeypatch, seed):
             sections["table4"] = sections["table22"] = ""
         return sections
 
-    monkeypatch.setattr(cli, "collect_fdb_flows", collect_fdb_flows)
-    monkeypatch.setattr(cli, "collect_port", collect_port)
-    monkeypatch.setattr(cli, "port_age", lambda item: rng.choice([None, 5.0]))
-    monkeypatch.setattr(cli, "preflight", fake_preflight(bad))
-    monkeypatch.setattr(cli, "run_parallel", sequential)
-    monkeypatch.setattr(cli, "time", types.SimpleNamespace(
+    monkeypatch.setattr(remote, "collect_fdb_flows", collect_fdb_flows)
+    monkeypatch.setattr(neutron, "collect_port", collect_port)
+    monkeypatch.setattr(fdb_watch, "port_age", lambda item: rng.choice([None, 5.0]))
+    monkeypatch.setattr(remote, "preflight", fake_preflight(bad))
+    monkeypatch.setattr(util, "run_parallel", sequential)
+    monkeypatch.setattr(fdb_watch, "time", types.SimpleNamespace(
         sleep=lambda seconds: setattr(clock, "now", clock.now + seconds), time=lambda: clock.now))
     args = types.SimpleNamespace(fdb_watch=MAC, fdb_watch_interval=15,
                                  fdb_watch_time=rng.choice([60, 120]), hosts=None, vni=0x64,
                                  workers=4)
-    return capture(lambda: cli.run_fdb_watch(args, [port], dict(IPS)))
+    return capture(lambda: fdb_watch.run_fdb_watch(args, [port], dict(IPS)))
 
 
 # --- main ---
@@ -294,13 +294,13 @@ def run_main(monkeypatch, seed, tmp):
     if "--summary-state" in argv:
         with open(state, "w") as handle:
             json.dump({"arp_stale": 1}, handle)
-    monkeypatch.setattr(cli, "collect_host", collect_host)
-    monkeypatch.setattr(cli, "collect_neutron", collect_neutron)
-    monkeypatch.setattr(cli, "collect_routers", lambda workers: [router])
-    monkeypatch.setattr(cli, "preflight", fake_preflight(bad))
-    monkeypatch.setattr(cli, "run_parallel", sequential)
-    monkeypatch.setattr(cli, "run_ssh", run_ssh)
-    monkeypatch.setattr(cli, "ssh_control_dir", lambda: tmp)
+    monkeypatch.setattr(remote, "collect_host", collect_host)
+    monkeypatch.setattr(neutron, "collect_neutron", collect_neutron)
+    monkeypatch.setattr(neutron, "collect_routers", lambda workers: [router])
+    monkeypatch.setattr(remote, "preflight", fake_preflight(bad))
+    monkeypatch.setattr(util, "run_parallel", sequential)
+    monkeypatch.setattr(remote, "run_ssh", run_ssh)
+    monkeypatch.setattr(remote, "ssh_control_dir", lambda: tmp)
     monkeypatch.setattr(sys, "argv", ["ovs-doctor"] + [arg.format(tmp=tmp) for arg in argv])
     code, out, err = capture(cli.main)
     files = {}
