@@ -12,7 +12,7 @@ TREES = {name: ast.parse(source) for name, source in MODULES.items()}
 MAX_LINES = 400
 MESSAGE_CALLS = {"ValueError", "parser.error", "problems.append", "util.fail"}
 # Collections whose order means something. Each has a comment in its module.
-ORDERED = {"SEVERITY", "SEVERITY_ORDER"}
+ORDERED = {"FDB_COLUMNS", "FINDING_COLUMNS", "SEVERITY", "SEVERITY_ORDER", "SUMMARY_COLUMNS"}
 
 
 def strings(nodes):

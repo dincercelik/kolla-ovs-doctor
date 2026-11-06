@@ -11,7 +11,7 @@ classifiers = [
     "Topic :: System :: Networking",
     "Topic :: System :: Systems Administration",
 ]
-dependencies = ["jinja2>=3.0", "openstacksdk>=1.0", "paramiko>=3.0"]
+dependencies = ["jinja2>=3.0", "openstacksdk>=1.0", "paramiko>=3.0", "prettytable>=2.0"]
 description = "Check and repair Neutron ML2/OVS state on Kolla-Ansible clouds"
 license = "Apache-2.0"
 license-files = ["LICENSE"]

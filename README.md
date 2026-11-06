@@ -50,6 +50,20 @@ ovs-doctor --fix --dry-run # show what --fix would change
 Before it runs anything on a host, it checks that the host is a Kolla-Ansible
 OVS host, and that sudo works without a password.
 
+Results come as tables, like the OpenStack CLI draws them:
+
+```
++------+----------+----------------+-----+----------------------------------+
+| Host | Severity | Kind           | VNI | Detail                           |
++------+----------+----------------+-----+----------------------------------+
+| c1   | critical | flood_missing  | 100 | c2 (192.0.2.2)                   |
+| c1   | critical | tunnel_missing |     | c2 (192.0.2.2), needed by 3 VNIs |
++------+----------+----------------+-----+----------------------------------+
+errors=0 findings=2 hosts=2 networks=1 flood_missing=1 tunnel_missing=1
+```
+
+Use `--json` for output that other tools read.
+
 See `ovs-doctor --help` for all options.
 
 ## SSH

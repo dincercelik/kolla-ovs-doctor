@@ -6,6 +6,8 @@ import types
 
 from kolla_ovs_doctor import cli, neutron, parse, remote, util
 
+# Table columns are in reading order: the host, then the entries of FDB_ENTRIES.
+FDB_COLUMNS = ("Host", "ARP", "Flood", "Unicast")
 FDB_ENTRIES = ("arp", "flood", "unicast")
 
 
@@ -106,10 +108,9 @@ def fdb_watch_complete(watch):
 def print_fdb_table(watch, owner):
     """Print when each host got each entry. Return True if an entry never came."""
     print(f"owner {owner}")
-    print(f"{'host':<8} " + " ".join(f"{entry:<8}" for entry in FDB_ENTRIES).rstrip())
-    missing = False
+    missing, rows = False, []
     for host in sorted(watch.targets):
-        row = []
+        row = [host]
         for entry in FDB_ENTRIES:
             value = watch.seen.get((host, entry))
             if value is not None:
@@ -119,7 +120,10 @@ def print_fdb_table(watch, owner):
                 row.append("never")
             else:
                 row.append("n/a")
-        print(f"{host:<8} " + " ".join(f"{value:<8}" for value in row).rstrip())
+        rows.append(row)
+    text = util.table(FDB_COLUMNS, rows)
+    if text:
+        print(text)
     return missing
 
 

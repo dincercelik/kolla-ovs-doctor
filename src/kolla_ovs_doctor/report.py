@@ -5,26 +5,33 @@ import sys
 import tempfile
 from collections import Counter, defaultdict
 
+from kolla_ovs_doctor import util
 from kolla_ovs_doctor.findings import SEVERITY, SEVERITY_ORDER, finding_order, severity_of
+
+# Table columns are in reading order, not sorted.
+FINDING_COLUMNS = ("Host", "Severity", "Kind", "VNI", "Detail")
+SUMMARY_COLUMNS = ("Severity", "Kind", "Count", "Change", "Top hosts")
 
 
 def print_summary(findings, previous):
     """Print one row per kind: most severe first, then by count, with the change."""
     counts = Counter(item["kind"] for item in findings)
-    print(f"{'severity':<9} {'kind':<22} {'count':>6} {'change':>7}  top hosts")
     kinds = set(counts) | set(previous)
     order = sorted(kinds, key=lambda kind: (
         SEVERITY_ORDER.index(SEVERITY.get(kind, "warning")), -counts[kind], kind))
     by_kind = defaultdict(Counter)
     for item in findings:
         by_kind[item["kind"]][item["host"]] += 1
+    rows = []
     for kind in order:
         busiest = sorted(by_kind[kind].items(), key=lambda pair: (-pair[1], pair[0]))[:4]
         top = " ".join(f"{host}:{count}" for host, count in busiest)
         change = counts[kind] - previous[kind] if kind in previous else None
         delta = "" if change is None else f"{change:+d}"
-        print(f"{SEVERITY.get(kind, 'warning'):<9} {kind:<22} {counts[kind]:>6} "
-              f"{delta:>7}  {top}")
+        rows.append([SEVERITY.get(kind, "warning"), kind, counts[kind], delta, top])
+    text = util.table(SUMMARY_COLUMNS, rows, right=("Change", "Count"))
+    if text:
+        print(text)
 
 
 def read_summary_state(path):
@@ -98,9 +105,11 @@ def print_report(state):
         if args.summary:
             print_summary(findings, previous)
         else:
-            for item in findings:
-                vni = f"vni={item['vni']:<8} " if item["vni"] else ""
-                print(f"{item['host']:<8} {vni}{item['kind']:<16} {item['detail']}")
+            rows = [[item["host"], severity_of(item), item["kind"], item["vni"] or "",
+                     item["detail"]] for item in findings]
+            text = util.table(FINDING_COLUMNS, rows, right=("VNI",))
+            if text:
+                print(text)
         for host, message in errors.items():
             print(f"{host:<8} ERROR {message}", file=sys.stderr)
         kinds = Counter(item["kind"] for item in findings)
