@@ -10,8 +10,8 @@ A host whose OVS agent is down is reported as agent_down. It is not checked.
 
 Run it on a host with SSH key access to the hypervisors. Load admin
 credentials first (source admin-openrc.sh). SSH reads HostName, User, Port and
-IdentityFile from ~/.ssh/config. Host keys must be in known_hosts. Jump hosts
-(ProxyJump, ProxyCommand) are not supported.
+IdentityFile from ~/.ssh/config. A new host key is accepted, but a changed one is
+refused. Jump hosts (ProxyJump, ProxyCommand) are not supported.
 
 It works only on Kolla-Ansible clouds that use Docker. Before it runs anything
 on a host, it checks two things. The host must be a Kolla-Ansible OVS host. The

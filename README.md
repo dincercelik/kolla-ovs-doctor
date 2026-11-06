@@ -73,8 +73,8 @@ ovs-doctor connects with Paramiko, one connection per host for the whole run.
 - From `~/.ssh/config` it reads `HostName`, `User`, `Port` and `IdentityFile`.
   `--ssh-user` wins over `User`.
 - It logs in with your ssh-agent or your key files.
-- A host key must already be in `~/.ssh/known_hosts` or
-  `/etc/ssh/ssh_known_hosts`. An unknown host is refused, not added.
+- A host that is not in `~/.ssh/known_hosts` or `/etc/ssh/ssh_known_hosts` is
+  accepted for the run, but not saved there. A host whose key changed is refused.
 - Jump hosts (`ProxyJump`, `ProxyCommand`) are not supported.
 
 ## Exit codes

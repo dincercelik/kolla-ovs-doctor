@@ -113,8 +113,17 @@ def test_ssh_config_is_looked_up_once_per_host(sshd, ssh_home):
     assert len(ssh_home.fqdn_calls) == 1
 
 
-def test_unknown_host_key_is_refused(ssh_home, tmp_path):
-    (tmp_path / ".ssh" / "known_hosts").write_text("")
+def test_unknown_host_key_is_accepted_and_not_saved(ssh_home, tmp_path):
+    known_hosts = tmp_path / ".ssh" / "known_hosts"
+    known_hosts.write_text("")
+    assert remote.run_ssh("box", None, 5, "echo hi") == "hi\n"
+    assert known_hosts.read_text() == ""
+
+
+def test_changed_host_key_is_refused(sshd, ssh_home, tmp_path):
+    other = paramiko.RSAKey.generate(2048)
+    (tmp_path / ".ssh" / "known_hosts").write_text(
+        f"[127.0.0.1]:{sshd.port} {other.get_name()} {other.get_base64()}\n")
     with pytest.raises(remote.RemoteError) as exc:
         remote.run_ssh("box", None, 5, "true")
     assert exc.value.returncode == 255

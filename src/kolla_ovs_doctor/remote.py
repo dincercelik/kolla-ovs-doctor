@@ -75,12 +75,16 @@ def ssh_options(host, user):
 
 
 def connect(host, user, timeout):
-    """Open an SSH connection to host. A host key that is not in known_hosts is refused."""
+    """Open an SSH connection to host.
+
+    A host that is not in known_hosts is accepted for this run, and not saved. A host
+    whose key changed is refused.
+    """
     client = paramiko.SSHClient()
     for path in (os.path.expanduser("~/.ssh/known_hosts"), "/etc/ssh/ssh_known_hosts"):
         if os.path.exists(path):
             client.load_system_host_keys(path)
-    client.set_missing_host_key_policy(paramiko.RejectPolicy())
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     client.connect(allow_agent=True, auth_timeout=timeout, banner_timeout=timeout,
                    look_for_keys=True, timeout=timeout, **ssh_options(host, user))
     client.get_transport().set_keepalive(30)
