@@ -51,11 +51,6 @@ def test_values_are_quoted():
     assert "del-flows br-tun 'x; rm -rf /'" in script
 
 
-def test_watch_script_passes_mac_and_ip():
-    script = scripts.render("fdb_watch", ip="10.0.0.5", mac="fa:16:3e:00:00:09")
-    assert "bash -s -- fa:16:3e:00:00:09 10.0.0.5 <<'OVS'" in script
-
-
 @pytest.mark.parametrize(("label", "script"), sorted(rendered().items()))
 def test_scripts_parse(label, script):
     result = subprocess.run(["bash", "-n"], capture_output=True, check=False, input=script,

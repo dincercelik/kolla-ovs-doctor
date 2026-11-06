@@ -6,6 +6,7 @@ import os
 import re
 import select
 import sys
+import threading
 import time
 
 import paramiko
@@ -13,6 +14,8 @@ import paramiko
 from kolla_ovs_doctor import parse, scripts, util
 
 DEFAULT_BACKUP_DIR = "/var/backups/kolla-ovs-doctor"
+# A script may run this many seconds longer than --timeout before it is stopped.
+SCRIPT_GRACE = 120
 # One open SSH client per (host, user) for the whole run. Calls to one host never
 # overlap, so this needs no lock.
 _CLIENTS = {}
@@ -84,7 +87,8 @@ def connect(host, user, timeout):
     for path in (os.path.expanduser("~/.ssh/known_hosts"), "/etc/ssh/ssh_known_hosts"):
         if os.path.exists(path):
             client.load_system_host_keys(path)
-    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    # Accepting new hosts was chosen on purpose. A changed host key is still refused.
+    client.set_missing_host_key_policy(paramiko.AutoAddPolicy())  # nosec B507
     client.connect(allow_agent=True, auth_timeout=timeout, banner_timeout=timeout,
                    look_for_keys=True, timeout=timeout, **ssh_options(host, user))
     client.get_transport().set_keepalive(30)
@@ -142,17 +146,36 @@ def read_channel(channel, deadline):
 
 def run_ssh(host, user, timeout, script):
     """Run a script on a host as root, with one sudo for the whole script."""
-    deadline = time.monotonic() + timeout + 120
+    deadline = time.monotonic() + timeout + SCRIPT_GRACE
+    expired = threading.Event()
+
+    def stop(channel):
+        expired.set()
+        channel.close()
+
     try:
         channel = open_channel(host, user, timeout)
-        with channel:
-            channel.exec_command("sudo -n bash -s")
-            channel.sendall(script.encode())
-            channel.shutdown_write()
-            out, err = read_channel(channel, deadline)
-            code = channel.recv_exit_status()
+        # exec_command and recv_exit_status wait without a time limit of their own.
+        # Closing the channel at the deadline wakes them up.
+        watchdog = threading.Timer(max(0.0, deadline - time.monotonic()), stop, [channel])
+        watchdog.daemon = True
+        watchdog.start()
+        try:
+            with channel:
+                # A fixed command. The script goes in on stdin, not in the command line.
+                channel.exec_command("sudo -n bash -s")  # nosec B601
+                channel.sendall(script.encode())
+                channel.shutdown_write()
+                out, err = read_channel(channel, deadline)
+                code = channel.recv_exit_status()
+        finally:
+            watchdog.cancel()
     except (EOFError, OSError, paramiko.SSHException) as exc:
+        if expired.is_set():
+            raise RemoteError("ssh: the host did not finish in time", 255) from exc
         raise RemoteError(f"ssh: {exc or type(exc).__name__}", 255) from exc
+    if expired.is_set():
+        raise RemoteError("ssh: the host did not finish in time", 255)
     if code != 0:
         raise RemoteError(err.strip() or f"ssh exit {code}", code)
     return out

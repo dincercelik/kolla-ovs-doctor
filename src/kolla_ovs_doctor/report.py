@@ -87,15 +87,18 @@ def write_prometheus_file(path, findings, hosts, collected):
 def print_report(state):
     """Print and save the results. Return the exit code."""
     args = state.args
-    findings = sorted(state.findings, key=finding_order)
+    all_findings = sorted(state.findings, key=finding_order)
     errors = dict(sorted(state.errors.items()))
-    if args.severity:
-        allowed = SEVERITY_ORDER[:SEVERITY_ORDER.index(args.severity) + 1]
-        findings = [item for item in findings if severity_of(item) in allowed]
+    allowed = SEVERITY_ORDER[:SEVERITY_ORDER.index(args.severity) + 1] if args.severity else (
+        SEVERITY_ORDER)
+    findings = [item for item in all_findings if severity_of(item) in allowed]
     if args.prometheus_file:
         write_prometheus_file(args.prometheus_file, findings, sorted(state.hosts + state.dead),
                               state.collected)
     previous = read_summary_state(args.summary_state) if args.summary_state else {}
+    # Compare only the kinds that --severity shows.
+    previous = {kind: count for kind, count in previous.items()
+                if SEVERITY.get(kind, "warning") in allowed}
     if args.json:
         for item in findings:
             item["severity"] = severity_of(item)
@@ -117,7 +120,9 @@ def print_report(state):
         print(f"errors={len(errors)} findings={len(findings)} hosts={len(state.hosts)} "
               f"networks={len(state.expected)} {summary}".rstrip())
     if args.summary_state:
-        write_summary_state(args.summary_state, findings)
+        # Save every finding, so the next run compares the same thing with or without
+        # --severity.
+        write_summary_state(args.summary_state, all_findings)
     if errors:
         return 2
     return 1 if findings else 0

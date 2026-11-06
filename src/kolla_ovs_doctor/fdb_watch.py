@@ -4,7 +4,7 @@ import sys
 import time
 import types
 
-from kolla_ovs_doctor import cli, neutron, parse, remote, util
+from kolla_ovs_doctor import neutron, parse, remote, util
 
 # Table columns are in reading order: the host, then the entries of FDB_ENTRIES.
 FDB_COLUMNS = ("Host", "ARP", "Flood", "Unicast")
@@ -136,10 +136,9 @@ def run_fdb_watch(args, ports, tunnel_ips):
     # ARP responder entries exist only for IPv4 addresses.
     ip = next((address for address in port["ips"] if ":" not in address), port["ips"][0])
     owner = port["host"]
-    all_hosts = set(cli.parse_hosts(args.hosts) if args.hosts else tunnel_ips)
+    all_hosts = set(util.parse_hosts(args.hosts) if args.hosts else tunnel_ips)
+    # The owner is never polled, but it is checked too: the port can move away later.
     problems = remote.preflight(all_hosts | {owner}, args)
-    if owner in problems:
-        util.fail(f"port owner {owner} failed the preflight check: {problems[owner]}")
     all_hosts -= set(problems)
     watch = types.SimpleNamespace(
         arp_ip="" if ":" in ip else ip,

@@ -3,7 +3,7 @@ import sys
 
 import pytest
 
-from kolla_ovs_doctor import cli, remote
+from kolla_ovs_doctor import cli
 
 
 def pytest_addoption(parser):
@@ -15,19 +15,6 @@ def pytest_addoption(parser):
 def update_golden(request):
     """Return True if the golden files should be rewritten."""
     return request.config.getoption("--update-golden")
-
-
-@pytest.fixture
-def ssh_scripts(monkeypatch):
-    """Replace run_ssh. Return {host: script} for every call."""
-    scripts = {}
-
-    def fake(host, user, timeout, script):
-        scripts[host] = script
-        return "/x\n"
-
-    monkeypatch.setattr(remote, "run_ssh", fake)
-    return scripts
 
 
 @pytest.fixture

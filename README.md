@@ -48,7 +48,8 @@ ovs-doctor --fix --dry-run # show what --fix would change
 ```
 
 Before it runs anything on a host, it checks that the host is a Kolla-Ansible
-OVS host, and that sudo works without a password.
+OVS host, and that sudo works without a password. A host that fails is reported
+as an error and skipped. Each script runs on a host under one `sudo -n bash -s`.
 
 Results come as tables, like the OpenStack CLI draws them:
 
@@ -66,12 +67,32 @@ Use `--json` for output that other tools read.
 
 See `ovs-doctor --help` for all options.
 
+## Checks
+
+By default all VXLAN networks are checked. Use `--vni` to check one. Tables 4,
+20, 21 and 22 are checked for missing flows, and for flows that Neutron does not
+know. A full run also does these checks (see `--checks`):
+
+- `drift`: config and version differences between agents
+- `dvr`: DVR MACs in tables 1 and 9
+- `routers`: L3 HA state, and qrouter and SNAT namespaces
+
+A host whose OVS agent is down is reported as `agent_down`. It is not checked.
+
+A network can have more than one VXLAN segment. Its ports count as known in
+every segment, so their flows are never deleted. They are not checked for
+missing flows, because Neutron does not say which segment a port uses.
+
+`--fdb-watch MAC --vni N` follows one port. It shows how long each host takes
+to add the l2pop flows for it. This shows if agents are slow or stuck.
+
 ## SSH
 
 ovs-doctor connects with Paramiko, one connection per host for the whole run.
 
 - From `~/.ssh/config` it reads `HostName`, `User`, `Port` and `IdentityFile`.
-  `--ssh-user` wins over `User`.
+  `--ssh-user` wins over `User`. With neither, it uses your local user name, as
+  ssh does.
 - It logs in with your ssh-agent or your key files.
 - A host that is not in `~/.ssh/known_hosts` or `/etc/ssh/ssh_known_hosts` is
   accepted for the run, but not saved there. A host whose key changed is refused.
@@ -85,10 +106,22 @@ ovs-doctor connects with Paramiko, one connection per host for the whole run.
 
 ## Repairs
 
-`--fix`, `--cleanup` and `--restore` change flows on the hosts. Run them with
+`--cleanup`, `--fix` and `--restore` change flows on the hosts. Run them with
 `--dry-run` first. Each change makes a backup of the br-tun flows in
-`/var/backups/kolla-ovs-doctor` on the host first. The OVS agent can overwrite
-these repairs, so they are a temporary fix.
+`--backup-dir` on the host first (default `/var/backups/kolla-ovs-doctor`). The
+OVS agent can overwrite these repairs, so they are a temporary fix. If a host
+fails the preflight check, they stop before they change anything.
+
+- `--cleanup` removes `flood_stale` tunnels from flood flows, and deletes the
+  flows of `vni_orphan` entries. A tunnel is kept if its host has a port on the
+  network, in any state (DOWN too). An orphan VNI is kept if an OVS port still
+  uses its local VLAN, or if another VNI uses the same VLAN (`vlan_conflict`).
+- `--fix` adds missing tunnels to flood flows. It deletes ARP responder and
+  unicast flows that Neutron does not know. Other findings are not changed.
+- `--restore` puts back the flood flow of one VNI on each host, from a backup.
+  Only that flow changes, not the whole bridge. By default it uses the newest
+  backup. A restore makes its own backup first, so running it again undoes it.
+  It does not bring back flows that `--fix` deleted. They stay in the backup.
 
 ## Tests
 

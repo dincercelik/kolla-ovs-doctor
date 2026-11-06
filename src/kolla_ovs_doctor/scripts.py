@@ -8,7 +8,9 @@ import shlex
 
 import jinja2
 
-ENVIRONMENT = jinja2.Environment(
+# The templates are shell scripts, not HTML, so HTML escaping would break them. The
+# quote filter makes values safe for the shell instead.
+ENVIRONMENT = jinja2.Environment(  # nosec B701
     autoescape=False, keep_trailing_newline=True,
     loader=jinja2.PackageLoader("kolla_ovs_doctor", "templates"), lstrip_blocks=True,
     trim_blocks=True, undefined=jinja2.StrictUndefined)

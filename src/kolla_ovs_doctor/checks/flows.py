@@ -28,30 +28,43 @@ def arp_is_known(state, ip, mac):
                for net, pair_mac in state["pair_cidrs"])
 
 
-def audit_stale_entries(host, sections, expected, context, add):
-    """Find entries that should not exist, shared local VLANs and missing ARP entries."""
+def audit_orphan_vnis(sections, context, add):
+    """Report VNIs that have flows on the host but no VXLAN network in Neutron."""
     known, only_vni = context["known"], context["only_vni"]
-    tunnels = parse.parse_tunnels(sections.get("tunnels", ""))
-    all_vlans = parse.parse_vlan_vnis(sections.get("table4", ""), sections.get("table22", ""))
-    vlans = parse.parse_unique_vlan_vnis(sections.get("table4", ""), sections.get("table22", ""))
-    arp_flows = parse.parse_arp_flows(sections.get("table21", ""))
-
     for vni in sorted(parse.present_vnis(sections)):
         if vni not in known and only_vni in (None, vni):
             add("vni_orphan", vni, "no VXLAN network in Neutron")
 
+
+def audit_vlan_conflicts(sections, context, add):
+    """Report local VLANs that more than one VNI uses."""
+    only_vni = context["only_vni"]
+    all_vlans = parse.parse_vlan_vnis(sections.get("table4", ""), sections.get("table22", ""))
     for vlan, vnis in sorted(all_vlans.items()):
         if len(vnis) > 1 and (only_vni is None or only_vni in vnis):
             names = ", ".join(f"{vni:#x}" for vni in sorted(vnis))
             add("vlan_conflict", min(vnis), f"local vlan {vlan} used by VNIs {names}")
 
+
+def audit_stale_unicast(sections, context, add):
+    """Report static table 20 flows for MACs that Neutron does not know."""
+    known, only_vni = context["known"], context["only_vni"]
     for flow_vni, mac, learned, _ in parse.parse_unicast_flows(sections.get("table20", "")):
         if (not learned and flow_vni in known and only_vni in (None, flow_vni)
                 and mac not in known[flow_vni]["macs"]):
             add("unicast_stale", flow_vni, f"{mac} is not a Neutron port")
 
+
+def audit_stale_arp(sections, context, add):
+    """Report ARP responder flows that Neutron does not know.
+
+    Return {vni: {ip: mac}} of the ARP flows on the host, for audit_missing_arp.
+    """
+    known, only_vni = context["known"], context["only_vni"]
+    all_vlans = parse.parse_vlan_vnis(sections.get("table4", ""), sections.get("table22", ""))
+    vlans = parse.parse_unique_vlan_vnis(sections.get("table4", ""), sections.get("table22", ""))
     arp_by_vni = defaultdict(dict)
-    for vlan, ip, mac in arp_flows:
+    for vlan, ip, mac in parse.parse_arp_flows(sections.get("table21", "")):
         vni = vlans.get(vlan)
         if vni is None and vlan in all_vlans:
             continue  # Shared local VLAN, reported as vlan_conflict.
@@ -62,7 +75,13 @@ def audit_stale_entries(host, sections, expected, context, add):
             if not arp_is_known(known[vni], ip, mac):
                 owners = ",".join(sorted(known[vni]["macs_by_ip"].get(ip, []))) or "none"
                 add("arp_stale", vni, f"{ip} -> {mac} (neutron: {owners})")
+    return arp_by_vni
 
+
+def audit_stale_floods(sections, expected, context, add):
+    """Report flood tunnels to hosts that do not need this VNI."""
+    known, only_vni = context["known"], context["only_vni"]
+    tunnels = parse.parse_tunnels(sections.get("tunnels", ""))
     for vni, flood_ports in parse.parse_flood_ports(sections.get("table22", "")).items():
         if vni not in known or only_vni not in (None, vni):
             continue
@@ -72,10 +91,27 @@ def audit_stale_entries(host, sections, expected, context, add):
             if reason:
                 add("flood_stale", vni, reason)
 
+
+def audit_missing_arp(host, arp_by_vni, expected, add):
+    """Report ARP entries that Neutron expects but the host does not have.
+
+    Only VNIs with ARP flows on the host count, so a host without arp_responder
+    reports nothing.
+    """
     for vni, entries in sorted(arp_by_vni.items()):
         for ip, mac, owner in expected.get(vni, {}).get("arps", []):
             if owner != host and ip not in entries:
                 add("arp_missing", vni, f"{ip} -> {mac} on {owner}")
+
+
+def audit_stale_entries(host, sections, expected, context, add):
+    """Find entries that should not exist, shared local VLANs and missing ARP entries."""
+    audit_orphan_vnis(sections, context, add)
+    audit_vlan_conflicts(sections, context, add)
+    audit_stale_unicast(sections, context, add)
+    arp_by_vni = audit_stale_arp(sections, context, add)
+    audit_stale_floods(sections, expected, context, add)
+    audit_missing_arp(host, arp_by_vni, expected, add)
 
 
 def audit_host(host, sections, expected, tunnel_ips, context=None):

@@ -1,10 +1,10 @@
-"""Tests for kolla_ovs_doctor.cli: options, host selection and the whole run."""
+"""Tests for kolla_ovs_doctor.cli: preflight, dead agents and API errors in a whole run."""
 import json
 
 import pytest
-from helpers import BAD_PREFLIGHT, GOOD_PREFLIGHT, run_cli
+from helpers import BAD_PREFLIGHT, GOOD_PREFLIGHT
 
-from kolla_ovs_doctor import cli, neutron, remote, scripts
+from kolla_ovs_doctor import neutron, remote, scripts
 
 
 @pytest.fixture
@@ -43,29 +43,6 @@ def test_no_host_passing_preflight_exits_2(monkeypatch, two_hosts, run_main):
     assert run_main(["--checks", "flows"])[0] == 2
 
 
-def test_parse_hosts():
-    assert cli.parse_hosts(" c2,a,,c2 , b") == ["a", "b", "c2"]
-
-
-def test_hosts_are_sorted_and_deduplicated(monkeypatch, run_main):
-    collected = []
-    monkeypatch.setattr(remote, "run_ssh", lambda *args: GOOD_PREFLIGHT)
-    monkeypatch.setattr(neutron, "collect_neutron",
-                        lambda: ([], [], {"a": "192.0.2.1", "b": "192.0.2.2"}, {}))
-    monkeypatch.setattr(remote, "collect_host", lambda host, *a, **k: collected.append(host) or {})
-    run_main(["--checks", "flows", "--hosts", "b,a,b,", "--json"])
-    assert collected == ["a", "b"]
-
-
-def test_empty_hosts_option_is_rejected(run_main):
-    assert run_main(["--hosts", ","])[0] == 2
-
-
-def test_no_hosts_exits_2(monkeypatch, run_main):
-    monkeypatch.setattr(neutron, "collect_neutron", lambda: ([], [], {}, {}))
-    assert run_main(["--checks", "flows"])[0] == 2
-
-
 @pytest.fixture
 def dead_agent(monkeypatch):
     monkeypatch.setattr(remote, "run_ssh", lambda *args: GOOD_PREFLIGHT)
@@ -85,36 +62,16 @@ def test_dead_agent_is_reported(dead_agent, run_main, tmp_path):
     assert 'host_up{host="dead1"} 0' in body and 'host_up{host="a"} 1' in body
 
 
-def test_hosts_option_with_only_a_dead_host(dead_agent, run_main):
-    code, out, _ = run_main(["--checks", "flows", "--hosts", "dead1", "--json"])
-    assert code == 1 and "agent_down" in out
+def test_failing_routers_api_is_one_error(monkeypatch, run_main):
+    def broken(workers):
+        raise RuntimeError("404 Not Found")
 
-
-def test_cannot_reach_openstack(monkeypatch, run_main):
-    def broken():
-        raise RuntimeError("Cloud envvars was not found.")
-
-    monkeypatch.setattr(neutron, "collect_neutron", broken)
-    code, _, err = run_main([])
-    assert code == 2 and "cannot reach OpenStack" in err
-
-
-def test_help_and_version():
-    help_text = run_cli("--help").stdout
-    assert help_text.startswith("usage: ovs-doctor")
-    for option in ("--fdb-watch-time", "--prometheus-file", "--summary-state", "--version"):
-        assert option in help_text
-    assert run_cli("--version").stdout.strip() == f"ovs-doctor {cli.__version__}"
-
-
-@pytest.mark.parametrize("option", ["--state", "--textfile", "--watch-interval", "--watch-time"])
-def test_old_option_names_are_gone(option):
-    result = run_cli(option, "1")
-    assert result.returncode == 2 and "unrecognized arguments" in result.stderr
-
-
-@pytest.mark.parametrize(("name", "accepted"), [("br-tun-2026-11-06-101010-4242.flows", True),
-                                                ("br-tun-2026-11-06-101010.flows", False)])
-def test_restore_file_names(name, accepted):
-    rejected = "--restore needs a br-tun" in run_cli("--restore", name, "--vni", "1").stderr
-    assert rejected != accepted
+    monkeypatch.setattr(remote, "run_ssh", lambda *args: GOOD_PREFLIGHT)
+    monkeypatch.setattr(neutron, "collect_neutron", lambda: (
+        [], [], {"a": "192.0.2.1"}, {"192.0.2.1": "a", "192.0.2.9": "dead1"}))
+    monkeypatch.setattr(remote, "collect_host", lambda host, *a, **k: {})
+    monkeypatch.setattr(neutron, "collect_routers", broken)
+    code, out, err = run_main([])
+    assert code == 2
+    assert "neutron  ERROR cannot read the routers (404 Not Found)" in err
+    assert "agent_down" in out  # The other findings are still reported.

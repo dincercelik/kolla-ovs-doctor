@@ -2,6 +2,7 @@
 import socket
 import subprocess
 import threading
+import time
 
 import paramiko
 
@@ -21,6 +22,7 @@ class Handler(paramiko.ServerInterface):
         return paramiko.AUTH_SUCCESSFUL
 
     def check_channel_exec_request(self, channel, command):
+        time.sleep(self.server.exec_delay)
         self.server.commands.append(command.decode())
         threading.Thread(target=run_command, args=(channel, command.decode()),
                          daemon=True).start()
@@ -66,6 +68,7 @@ class SSHServer:
     def __init__(self):
         self.client_key = paramiko.RSAKey.generate(2048)
         self.commands, self.transports, self.users = [], [], []
+        self.exec_delay = 0  # Seconds to wait before answering an exec request.
         self.host_key = paramiko.RSAKey.generate(2048)
         self.socket = socket.create_server(("127.0.0.1", 0))
         self.port = self.socket.getsockname()[1]

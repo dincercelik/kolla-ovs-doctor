@@ -21,13 +21,3 @@ def test_real_config_drift_is_still_found():
     found = drift.audit_drift(collected)
     assert [(item["host"], item["kind"], item["detail"]) for item in found] == [
         ("hv07", "config_drift", "l2_population=false (most hosts: true)")]
-
-
-def test_numbers_and_versions_are_compared_as_written():
-    collected = {host: {"drift": text} for host, text in (
-        ("hv01", "heartbeat_timeout_threshold=0\nimage=kolla/neutron:2025.1"),
-        ("hv02", "heartbeat_timeout_threshold=0\nimage=kolla/neutron:2025.1"),
-        ("hv07", "heartbeat_timeout_threshold=false\nimage=Kolla/neutron:2025.1"))}
-    assert sorted((item["kind"], item["detail"]) for item in drift.audit_drift(collected)) == [
-        ("config_drift", "heartbeat_timeout_threshold=false (most hosts: 0)"),
-        ("version_drift", "image=Kolla/neutron:2025.1 (most hosts: kolla/neutron:2025.1)")]

@@ -1,6 +1,4 @@
 """Plain helpers shared by the tests."""
-import subprocess
-import sys
 
 
 def kinds(findings):
@@ -8,18 +6,8 @@ def kinds(findings):
     return sorted(item["kind"] for item in findings)
 
 
-def run_cli(*argv):
-    """Run ovs-doctor in a new process. Return the CompletedProcess."""
-    return subprocess.run([sys.executable, "-m", "kolla_ovs_doctor", *argv],
-                          capture_output=True, check=False, text=True)
-
-
 ARP_FLOW = ("table=21, priority=1,arp,dl_vlan=5,arp_tpa=10.9.9.9 "
             "actions=mod_dl_src:fa:16:3e:99:99:99,IN_PORT")
-BR_TUN_DUMP = """NXST_FLOW reply (xid=0x4):
- cookie=0x1, duration=1.0s, table=4, n_packets=0, priority=1,tun_id=0x64 actions=mod_vlan_vid:3,resubmit(,10)
- cookie=0x1, duration=1.0s, table=20, n_packets=0, priority=2,dl_vlan=3,dl_dst=fa:16:3e:00:00:09 actions=strip_vlan,load:0x64->NXM_NX_TUN_ID[],output:2
- cookie=0x1, duration=1.0s, table=22, n_packets=0, priority=1,dl_vlan=3 actions=strip_vlan,load:0x64->NXM_NX_TUN_ID[],output:2"""  # noqa: E501
 GOOD_PREFLIGHT = "@preflight done\n"
 BAD_PREFLIGHT = "@problem passwordless sudo is not available\n@preflight done\n"
 

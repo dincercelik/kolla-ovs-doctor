@@ -5,6 +5,11 @@ from concurrent.futures import ThreadPoolExecutor
 import prettytable
 
 
+def parse_hosts(value):
+    """Return the --hosts list sorted, without duplicates and empty entries."""
+    return sorted({host.strip() for host in value.split(",") if host.strip()})
+
+
 def run_parallel(hosts, func, workers):
     """Run func(host) on each host in parallel.
 

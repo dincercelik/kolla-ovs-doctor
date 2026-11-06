@@ -1,53 +1,4 @@
-"""ovs-doctor: check that the br-tun flows on every OVS host match Neutron's VXLAN state.
-
-By default all VXLAN networks are checked. Use --vni to check one.
-Tables 4, 20, 21 and 22 are checked for missing flows, and for flows that
-Neutron does not know. A full run also does these checks (see --checks):
-  drift    config and version differences between agents
-  dvr      DVR MACs in tables 1 and 9
-  routers  L3 HA state, and qrouter and SNAT namespaces
-A host whose OVS agent is down is reported as agent_down. It is not checked.
-
-Run it on a host with SSH key access to the hypervisors. Load admin
-credentials first (source admin-openrc.sh). SSH reads HostName, User, Port and
-IdentityFile from ~/.ssh/config. A new host key is accepted, but a changed one is
-refused. Jump hosts (ProxyJump, ProxyCommand) are not supported.
-
-It works only on Kolla-Ansible clouds that use Docker. Before it runs anything
-on a host, it checks two things. The host must be a Kolla-Ansible OVS host. The
-SSH user must be able to use sudo without a password. If a host fails, --cleanup,
---fix and --restore stop before they change anything. A normal run reports the
-host as an error and skips it. Each script runs on a host under one
-`sudo -n bash -s`. The scripts do not call sudo themselves.
-
-A network can have more than one VXLAN segment. Its ports count as known in
-every segment, so their flows are never deleted. They are not checked for
-missing flows, because Neutron does not say which segment a port uses.
-
-Exit codes:
-  0  no problems found
-  1  problems found
-  2  collection, fix or preflight errors
-
---cleanup removes flood_stale tunnels from flood flows. It also deletes the
-flows of vni_orphan entries. Run it with --dry-run first. A tunnel is kept if
-its host has a port on the network, in any state (DOWN too). An orphan VNI is
-kept if an OVS port still uses its local VLAN. It is also kept if another VNI
-uses the same VLAN (vlan_conflict).
-
---fdb-watch MAC --vni N follows one port. It shows how long each host takes to
-add the l2pop flows for it. This shows if agents are slow or stuck.
-
---fix adds missing tunnels to flood flows. It deletes ARP responder and unicast
-flows that Neutron does not know. Run it with --dry-run first. The fix may not
-last, because the OVS agent can overwrite it. Other findings are not changed.
---restore does not bring back deleted flows. They stay in the backup file.
-
---restore puts back the flood flow of one VNI on each host, from a backup file.
-Only that flow changes, not the whole bridge. By default it uses the newest
-backup. A restore makes its own backup first, so running it again undoes it.
-Backups go to --backup-dir on each host (default /var/backups/kolla-ovs-doctor).
-"""
+"""The ovs-doctor command: read the options, run the checks and print the report."""
 import argparse
 import os
 import re
@@ -68,16 +19,22 @@ from kolla_ovs_doctor import (
 from kolla_ovs_doctor.findings import SEVERITY_ORDER, make_finding
 
 ALL_CHECKS = ("drift", "dvr", "flows", "routers")
+DESCRIPTION = """\
+Check that the br-tun flows on every OVS host match Neutron's VXLAN state.
+It works only on Kolla-Ansible clouds that use Docker. Load admin credentials
+first (source admin-openrc.sh)."""
+EPILOG = """\
+exit codes:
+  0  no problems found
+  1  problems found
+  2  collection, fix or preflight errors
 
-
-def parse_hosts(value):
-    """Return the --hosts list sorted, without duplicates and empty entries."""
-    return sorted({host.strip() for host in value.split(",") if host.strip()})
+More: https://github.com/dincercelik/kolla-ovs-doctor"""
 
 
 def parse_args():
     """Read and check the command line. Return (args, checks)."""
-    parser = argparse.ArgumentParser(description=__doc__,
+    parser = argparse.ArgumentParser(description=DESCRIPTION, epilog=EPILOG,
                                      formatter_class=argparse.RawDescriptionHelpFormatter,
                                      prog="ovs-doctor")
     parser.add_argument("--backup-dir", default=remote.DEFAULT_BACKUP_DIR,
@@ -106,7 +63,8 @@ def parse_args():
                              "each host (needs --vni, default: newest)")
     parser.add_argument("--severity", choices=SEVERITY_ORDER,
                         help="show and count only findings at this level or above")
-    parser.add_argument("--ssh-user", default="ubuntu")
+    parser.add_argument("--ssh-user",
+                        help="SSH user (default: User from ~/.ssh/config, else the local user)")
     parser.add_argument("--summary", action="store_true",
                         help="print a table by finding type instead of every line")
     parser.add_argument("--summary-state",
@@ -133,20 +91,29 @@ def parse_args():
         parser.error("--dry-run needs --cleanup, --fix or --restore")
     if args.fdb_watch and args.vni is None:
         parser.error("--fdb-watch needs --vni")
-    if args.hosts is not None and not parse_hosts(args.hosts):
+    if args.hosts is not None and not util.parse_hosts(args.hosts):
         parser.error("--hosts needs at least one host name")
+    if args.prometheus_file and not folder_exists(args.prometheus_file):
+        parser.error("--prometheus-file is in a folder that does not exist")
     if args.restore and args.vni is None:
         parser.error("--restore needs --vni")
     if args.restore and args.restore != "latest":
         args.restore = os.path.basename(args.restore)
         if not re.fullmatch(r"br-tun-\d{4}-\d{2}-\d{2}-\d{6}-\d+\.flows", args.restore):
             parser.error("--restore needs a br-tun-<date>-<time>-<pid>.flows file name")
+    if args.summary_state and not folder_exists(args.summary_state):
+        parser.error("--summary-state is in a folder that does not exist")
     return args, checks
+
+
+def folder_exists(path):
+    """Return True if the folder that would hold path exists."""
+    return os.path.isdir(os.path.dirname(os.path.abspath(path)))
 
 
 def select_hosts(args, tunnel_ips, ip_hosts):
     """Return (hosts to check, hosts with a dead OVS agent)."""
-    hosts = parse_hosts(args.hosts) if args.hosts else sorted(tunnel_ips)
+    hosts = util.parse_hosts(args.hosts) if args.hosts else sorted(tunnel_ips)
     # Hosts with a dead OVS agent are not in tunnel_ips. Report them as agent_down.
     dead = sorted(set(ip_hosts.values()) - set(tunnel_ips))
     if args.hosts:
@@ -186,8 +153,12 @@ def audit_all(state):
     if "routers" in state.checks:
         netns = {host: checks.routers.parse_netns(sections.get("netns", ""))
                  for host, sections in state.collected.items()}
-        routers = neutron.collect_routers(state.args.workers)
-        findings += checks.routers.audit_routers(routers, state.ports, netns)
+        try:
+            routers = neutron.collect_routers(state.args.workers)
+        except Exception as exc:  # The other checks still count.
+            state.errors["neutron"] = f"cannot read the routers ({exc})"
+        else:
+            findings += checks.routers.audit_routers(routers, state.ports, netns)
     return findings
 
 

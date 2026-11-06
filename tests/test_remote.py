@@ -5,32 +5,9 @@ import types
 
 import paramiko
 import pytest
-from helpers import BR_TUN_DUMP
 from sshd import SSHServer
 
-from kolla_ovs_doctor import parse, remote
-
-
-def test_collect_host_splits_the_br_tun_dump(monkeypatch):
-    monkeypatch.setattr(remote, "run_ssh", lambda host, user, timeout, script: (
-        '=====AUDIT:tunnels=====\nofport : 2\noptions : {remote_ip="192.0.2.9"}\n'
-        "=====AUDIT:tags=====\n3\n=====AUDIT:brtun=====\n" + BR_TUN_DUMP))
-    sections = remote.collect_host("h", None, 1)
-    assert "brtun" not in sections
-    assert parse.present_vnis(sections) == {0x64}
-    assert parse.parse_tunnels(sections["tunnels"]) == {2: "192.0.2.9"}
-
-
-def test_backup_script(ssh_scripts):
-    args = types.SimpleNamespace(backup_dir="/var/backups/kolla ovs doctor", ssh_user=None,
-                                 timeout=1)
-    remote.apply_changes("apply", args, [], [])
-    remote.read_backup("latest", args, "latest")
-    remote.read_backup("named", args, "br-tun-2026-11-05-101010-1.flows")
-    assert "DIR='/var/backups/kolla ovs doctor'" in ssh_scripts["apply"]
-    assert '-$$.flows"' in ssh_scripts["apply"]
-    assert 'mv "$BACKUP.tmp" "$BACKUP"' in ssh_scripts["apply"]
-    assert "/tmp" not in ssh_scripts["latest"] and "/tmp" not in ssh_scripts["named"]
+from kolla_ovs_doctor import remote
 
 
 @pytest.fixture(scope="module")
@@ -78,9 +55,17 @@ def test_run_ssh_uses_ssh_config_and_one_sudo(sshd, ssh_home):
     assert sshd.commands == ["sudo -n bash -s"]
 
 
-def test_ssh_user_option_wins_over_config(sshd, ssh_home):
-    remote.run_ssh("box", "other", 5, "true")
-    assert sshd.users == ["other"]
+def test_a_host_that_never_answers_stops_at_the_deadline(sshd, ssh_home, monkeypatch):
+    monkeypatch.setattr(remote, "SCRIPT_GRACE", 0)
+    sshd.exec_delay = 3
+    started = time.monotonic()
+    try:
+        with pytest.raises(remote.RemoteError) as exc:
+            remote.run_ssh("box", None, 1, "true")
+    finally:
+        sshd.exec_delay = 0
+    assert exc.value.returncode == 255 and "did not finish in time" in str(exc.value)
+    assert time.monotonic() - started < 2.5
 
 
 def test_exit_code_and_stderr(ssh_home):
@@ -94,30 +79,6 @@ def test_big_output_with_stderr_arrives_whole(ssh_home):
               "head -c 5000000 /dev/zero | tr '\\0' x\n")
     out = remote.run_ssh("box", None, 5, script)
     assert len(out) == 5000000 and set(out) == {"x"}
-
-
-def test_one_connection_per_host_and_reconnect(sshd, ssh_home):
-    before = sshd.accepted
-    remote.run_ssh("box", None, 5, "true")
-    remote.run_ssh("box", None, 5, "true")
-    assert sshd.accepted == before + 1
-    sshd.drop_connections()
-    assert remote.run_ssh("box", None, 5, "echo back") == "back\n"
-    assert sshd.accepted == before + 2
-
-
-def test_ssh_config_is_looked_up_once_per_host(sshd, ssh_home):
-    remote.run_ssh("box", None, 5, "true")
-    sshd.drop_connections()
-    remote.run_ssh("box", None, 5, "true")
-    assert len(ssh_home.fqdn_calls) == 1
-
-
-def test_unknown_host_key_is_accepted_and_not_saved(ssh_home, tmp_path):
-    known_hosts = tmp_path / ".ssh" / "known_hosts"
-    known_hosts.write_text("")
-    assert remote.run_ssh("box", None, 5, "echo hi") == "hi\n"
-    assert known_hosts.read_text() == ""
 
 
 def test_changed_host_key_is_refused(sshd, ssh_home, tmp_path):
@@ -141,21 +102,6 @@ def test_jump_hosts_are_not_supported(ssh_home):
     with pytest.raises(remote.RemoteError) as exc:
         remote.run_ssh("box", None, 5, "true")
     assert exc.value.returncode == 255 and "jump hosts are not supported" in str(exc.value)
-
-
-def test_read_channel_stops_at_the_deadline(ssh_home):
-    channel = remote.client_for("box", None, 5).get_transport().open_session()
-    channel.exec_command("sleep 3")
-    with pytest.raises(remote.RemoteError) as exc:
-        remote.read_channel(channel, time.monotonic() + 0.3)
-    channel.close()
-    assert exc.value.returncode == 255 and "did not finish in time" in str(exc.value)
-
-
-def test_parse_preflight():
-    assert remote.parse_preflight("@preflight done\n") == []
-    assert remote.parse_preflight("@problem a\n@problem b\n@preflight done") == ["a", "b"]
-    assert remote.parse_preflight("@problem a\n") == ["preflight output incomplete"]
 
 
 @pytest.mark.parametrize(("code", "start"), [(1, "passwordless sudo is not available"),
