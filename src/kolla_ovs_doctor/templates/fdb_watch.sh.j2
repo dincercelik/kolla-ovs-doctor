@@ -1,0 +1,15 @@
+{#
+--fdb-watch reads only the flows of one port.
+Values: mac, and ip (its IPv4 address, or "" if it has none).
+In the container, $1 is the MAC and $2 the IP. Table 21 is skipped if $2 is empty.
+#}
+set -e
+docker exec -i openvswitch_vswitchd bash -s -- {{ mac | quote }} {{ ip | quote }} <<'OVS'
+set -e
+echo "{{ section("arp_count") }}"; ovs-ofctl dump-aggregate br-tun table=21,arp
+echo "{{ section("table4") }}"; ovs-ofctl --no-names dump-flows br-tun table=4
+echo "{{ section("table20") }}"; ovs-ofctl --no-names dump-flows br-tun "table=20,dl_dst=$1"
+echo "{{ section("table21") }}"; [ -z "$2" ] || ovs-ofctl --no-names dump-flows br-tun "table=21,arp,arp_tpa=$2"
+echo "{{ section("table22") }}"; ovs-ofctl --no-names dump-flows br-tun table=22
+echo "{{ section("tunnels") }}"; ovs-vsctl --columns=ofport,options find interface type=vxlan
+OVS

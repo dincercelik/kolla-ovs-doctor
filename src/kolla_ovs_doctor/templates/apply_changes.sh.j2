@@ -1,0 +1,19 @@
+{#
+Back up the br-tun flows to backup_dir, then change and delete flows.
+Values: backup_dir, changes (flows for mod-flows) and deletions (flows for
+del-flows). Prints the path of the backup file.
+#}
+set -e
+D='docker exec openvswitch_vswitchd'
+DIR={{ backup_dir | quote }}
+mkdir -p "$DIR"
+BACKUP="$DIR/br-tun-$(date +%F-%H%M%S)-$$.flows"
+$D ovs-ofctl --no-names dump-flows br-tun > "$BACKUP.tmp"
+mv "$BACKUP.tmp" "$BACKUP"
+{% for flow in changes %}
+$D ovs-ofctl mod-flows br-tun {{ flow | quote }}
+{% endfor %}
+{% for flow in deletions %}
+$D ovs-ofctl del-flows br-tun {{ flow | quote }}
+{% endfor %}
+echo "$BACKUP"

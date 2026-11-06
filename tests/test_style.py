@@ -12,7 +12,7 @@ TREES = {name: ast.parse(source) for name, source in MODULES.items()}
 MAX_LINES = 400
 MESSAGE_CALLS = {"ValueError", "parser.error", "problems.append", "util.fail"}
 # Collections whose order means something. Each has a comment in its module.
-ORDERED = {"SEVERITY", "SEVERITY_ORDER", "WATCH_SCRIPT sections"}
+ORDERED = {"SEVERITY", "SEVERITY_ORDER"}
 
 
 def strings(nodes):
@@ -42,7 +42,7 @@ def unsorted_collections(tree):
             func = ast.unparse(node.func)
             if (len(words) > 1 and words != sorted(words)
                     and func not in ("parser.add_argument", "print", "subprocess.run")):
-                found.append("WATCH_SCRIPT sections" if "{table4}" in func else f"{func}()")
+                found.append(f"{func}()")
     return found
 
 
@@ -71,7 +71,8 @@ def test_collections_are_sorted(name):
 @pytest.mark.parametrize("name", sorted(MODULES))
 def test_module_constants_are_sorted_in_groups(name):
     constants = [target.id for node in TREES[name].body if isinstance(node, ast.Assign)
-                 for target in node.targets if not target.id.startswith("__")]
+                 for target in node.targets
+                 if isinstance(target, ast.Name) and not target.id.startswith("__")]
     groups = [[name for name in constants if name.endswith("_SCRIPT")],
               [name for name in constants if name.startswith("RE_")],
               [name for name in constants if not name.endswith("_SCRIPT")

@@ -3,7 +3,6 @@ import atexit
 import functools
 import os
 import re
-import shlex
 import shutil
 import subprocess
 import sys
@@ -73,7 +72,7 @@ def preflight_host(host, args):
     """Return why a host cannot be used, or None if it passes."""
     try:
         problems = parse_preflight(run_ssh(host, args.ssh_user, args.timeout,
-                                           scripts.PREFLIGHT_SCRIPT))
+                                           scripts.render("preflight")))
     except RemoteError as exc:
         # SSH exits with 255 if it cannot connect. The preflight script always exits
         # with 0. So any other exit code means sudo did not start the script.
@@ -98,14 +97,14 @@ def preflight(hosts, args):
 
 def collect_host(host, user, timeout, extra=""):
     """Return a host's sections: tunnels, tags, table<N> and any extra checks."""
-    sections = split_sections(run_ssh(host, user, timeout, scripts.COLLECT_SCRIPT + extra))
+    sections = split_sections(run_ssh(host, user, timeout, scripts.render("collect") + extra))
     sections.update(parse.split_flow_tables(sections.pop("brtun", "")))
     return sections
 
 
 def collect_fdb_flows(host, args, mac, ip):
     """Read only the flows --fdb-watch needs for one port."""
-    script = scripts.WATCH_SCRIPT.format(ip=shlex.quote(ip or ""), mac=shlex.quote(mac))
+    script = scripts.render("fdb_watch", ip=ip or "", mac=mac)
     return split_sections(run_ssh(host, args.ssh_user, args.timeout, script))
 
 
@@ -114,19 +113,8 @@ def apply_changes(host, args, changes=(), deletions=()):
 
     Return the path of the backup file on the host.
     """
-    lines = [f"$D ovs-ofctl mod-flows br-tun {shlex.quote(flow)}" for flow in changes]
-    lines += [f"$D ovs-ofctl del-flows br-tun {shlex.quote(flow)}" for flow in deletions]
-    script = """
-set -e
-D='docker exec openvswitch_vswitchd'
-DIR={}
-mkdir -p "$DIR"
-BACKUP="$DIR/br-tun-$(date +%F-%H%M%S)-$$.flows"
-$D ovs-ofctl --no-names dump-flows br-tun > "$BACKUP.tmp"
-mv "$BACKUP.tmp" "$BACKUP"
-{}
-echo "$BACKUP"
-""".format(shlex.quote(args.backup_dir), "\n".join(lines))
+    script = scripts.render("apply_changes", backup_dir=args.backup_dir, changes=list(changes),
+                            deletions=list(deletions))
     return run_ssh(host, args.ssh_user, args.timeout, script).strip()
 
 
@@ -138,16 +126,6 @@ def apply_flood_flow(host, args, vlan, actions):
 
 def read_backup(host, args, name):
     """Return (path, table 22 lines) from a backup in --backup-dir, or (None, "")."""
-    if name == "latest":
-        select = "F=$(ls -1t \"$DIR\"/br-tun-*.flows 2>/dev/null | head -1)"
-    else:
-        select = f"F=\"$DIR/{name}\"; [ -f \"$F\" ] || F="
-    script = f"""
-DIR={shlex.quote(args.backup_dir)}
-{select}
-[ -n "$F" ] || exit 0
-echo "$F"
-grep 'table=22' "$F" || true
-"""
+    script = scripts.render("read_backup", backup_dir=args.backup_dir, name=name)
     lines = run_ssh(host, args.ssh_user, args.timeout, script).splitlines()
     return (lines[0], "\n".join(lines[1:])) if lines else (None, "")

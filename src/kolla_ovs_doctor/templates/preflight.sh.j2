@@ -1,0 +1,34 @@
+{#
+Check that a host is a Kolla-Ansible OVS host. Prints one "@problem <text>" line
+per problem, then "@preflight done", and always exits 0.
+It runs under sudo, like every other script. If sudo asks for a password, the
+script does not start. preflight_host sees this in the exit code.
+#}
+if [ "$(id -u)" != 0 ]; then
+  echo '@problem sudo did not run the script as root'
+  echo '@preflight done'
+  exit 0
+fi
+if ! command -v docker >/dev/null 2>&1; then
+  if command -v podman >/dev/null 2>&1; then
+    echo '@problem podman deployments are not supported'
+  else
+    echo '@problem docker not found'
+  fi
+  echo '@preflight done'
+  exit 0
+fi
+test -f /etc/kolla/neutron-openvswitch-agent/config.json \
+  || echo '@problem /etc/kolla/neutron-openvswitch-agent/config.json not found'
+for c in neutron_openvswitch_agent openvswitch_db openvswitch_vswitchd; do
+  [ "$(docker inspect -f '{% raw %}{{.State.Running}}{% endraw %}' "$c" 2>/dev/null)" = true ] \
+    || echo "@problem container $c is not running"
+done
+if label=$(docker inspect -f '{% raw %}{{index .Config.Labels "kolla_version"}}{% endraw %}' \
+    neutron_openvswitch_agent 2>/dev/null); then
+  case "$label" in
+    ''|'<no value>') echo '@problem neutron_openvswitch_agent has no kolla_version label' ;;
+  esac
+fi
+echo '@preflight done'
+exit 0

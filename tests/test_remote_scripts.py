@@ -19,7 +19,8 @@ def run_script(script):
 @pytest.fixture(scope="module")
 def collected():
     """Run the collect, router and drift scripts once. Return (result, sections)."""
-    result = run_script(scripts.COLLECT_SCRIPT + scripts.ROUTER_SCRIPT + scripts.DRIFT_SCRIPT)
+    result = run_script(scripts.render("collect") + scripts.render("router")
+                        + scripts.render("drift"))
     sections = remote.split_sections(result.stdout)
     sections.update(parse.split_flow_tables(sections.pop("brtun", "")))
     return result, sections
@@ -55,7 +56,7 @@ def test_drift_script_keys(collected):
 
 
 def test_watch_script_passes_mac_and_ip():
-    result = run_script(scripts.WATCH_SCRIPT.format(ip="10.0.0.5", mac="fa:16:3e:00:00:09"))
+    result = run_script(scripts.render("fdb_watch", ip="10.0.0.5", mac="fa:16:3e:00:00:09"))
     sections = remote.split_sections(result.stdout)
     assert result.returncode == 0, result.stderr
     assert "dl_dst=fa:16:3e:00:00:09" in sections["table20"]
@@ -64,7 +65,7 @@ def test_watch_script_passes_mac_and_ip():
 
 
 def test_watch_script_without_ipv4_skips_table_21():
-    result = run_script(scripts.WATCH_SCRIPT.format(ip="''", mac="fa:16:3e:00:00:09"))
+    result = run_script(scripts.render("fdb_watch", ip="", mac="fa:16:3e:00:00:09"))
     assert result.returncode == 0, result.stderr
     assert remote.split_sections(result.stdout)["table21"] == ""
     assert "arp_tpa" not in result.stderr

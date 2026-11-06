@@ -13,8 +13,9 @@ def two_hosts(monkeypatch):
     calls = []
 
     def fake_ssh(host, user, timeout, script):
-        calls.append((host, "preflight" if script == scripts.PREFLIGHT_SCRIPT else "other"))
-        if script == scripts.PREFLIGHT_SCRIPT:
+        is_preflight = script == scripts.render("preflight")
+        calls.append((host, "preflight" if is_preflight else "other"))
+        if is_preflight:
             return BAD_PREFLIGHT if host == "bad" else GOOD_PREFLIGHT
         return ""
 

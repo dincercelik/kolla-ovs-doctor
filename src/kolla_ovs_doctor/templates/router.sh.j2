@@ -1,0 +1,36 @@
+{#
+Print the addresses, neighbours, default routes and SNAT rules of every qrouter
+and snat namespace on the host, for the routers check.
+#}
+echo '{{ section("netns") }}'
+# A subshell with set +e, because grep may find nothing here.
+(
+set +e
+NS=$(ip netns list | awk '{print $1}' | grep -E '^(qrouter|snat)-')
+for ns in $NS; do
+  echo "@ns $ns"
+  echo "@addr"; ip -n "$ns" -o -4 addr show
+  echo "@neigh"; ip -n "$ns" -4 neigh show nud permanent
+  echo "@route"; ip -n "$ns" -4 route show table all | grep '^default'
+done
+# Read SNAT rules with the iptables of the l3 agent. The host may use the other
+# iptables backend (legacy or nft), and then it shows no rules.
+if [ -n "$NS" ] && docker ps --format '{% raw %}{{.Names}}{% endraw %}' | grep -qx neutron_l3_agent; then
+  # $NS is a list of namespace names. It is not quoted, so each name is one argument.
+  # shellcheck disable=SC2086
+  docker exec -i -u root neutron_l3_agent bash -s -- $NS <<'L3' | grep -E '^@|-j SNAT'
+for ns in "$@"; do
+  echo "@ns $ns"; echo "@nat"
+  ip netns exec "$ns" iptables -t nat -S
+done
+L3
+else
+  for ns in $NS; do
+    echo "@ns $ns"; echo "@nat"
+    for ipt in iptables iptables-legacy iptables-nft; do
+      command -v "$ipt" >/dev/null && ip netns exec "$ns" "$ipt" -t nat -S 2>/dev/null
+    done | grep -- '-j SNAT' | sort -u
+  done
+fi
+exit 0
+)

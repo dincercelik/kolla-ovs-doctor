@@ -1,2 +1,3 @@
 graft tests
+recursive-include src/kolla_ovs_doctor/templates *.sh.j2
 global-exclude *.py[cod] __pycache__

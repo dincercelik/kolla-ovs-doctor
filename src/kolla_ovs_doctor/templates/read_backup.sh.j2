@@ -1,0 +1,16 @@
+{#
+Print the path of a br-tun backup in backup_dir, then its table 22 lines.
+Values: backup_dir, and name ("latest" for the newest backup, or a file name).
+Prints nothing if there is no such backup.
+#}
+DIR={{ backup_dir | quote }}
+{% if name == "latest" %}
+# This tool makes the backup names, so they have no spaces and ls is safe.
+# shellcheck disable=SC2012
+F=$(ls -1t "$DIR"/br-tun-*.flows 2>/dev/null | head -1)
+{% else %}
+F="$DIR"/{{ name | quote }}; [ -f "$F" ] || F=
+{% endif %}
+[ -n "$F" ] || exit 0
+echo "$F"
+grep 'table=22' "$F" || true

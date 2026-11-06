@@ -1,0 +1,12 @@
+{#
+Collect a host's br-tun state: one docker exec and one br-tun dump.
+remote.collect_host splits the dump into tables. The router and drift scripts
+are added after this one when those checks are on.
+#}
+set -e
+docker exec -i openvswitch_vswitchd bash -s <<'OVS'
+set -e
+echo "{{ section("brtun") }}"; ovs-ofctl --no-names dump-flows br-tun
+echo "{{ section("tags") }}"; ovs-vsctl --bare --columns=tag list port
+echo "{{ section("tunnels") }}"; ovs-vsctl --columns=ofport,options find interface type=vxlan
+OVS

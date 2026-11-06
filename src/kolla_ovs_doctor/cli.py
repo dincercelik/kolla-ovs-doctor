@@ -157,8 +157,8 @@ def select_hosts(args, tunnel_ips, ip_hosts):
 
 def collect_all(state):
     """Read every usable host. Return {host: sections}. Failures are added to errors."""
-    extra = (scripts.ROUTER_SCRIPT if "routers" in state.checks else "") + (
-        scripts.DRIFT_SCRIPT if "drift" in state.checks else "")
+    extra = (scripts.render("router") if "routers" in state.checks else "") + (
+        scripts.render("drift") if "drift" in state.checks else "")
     results = util.run_parallel(state.usable, lambda host: remote.collect_host(
         host, state.args.ssh_user, state.args.timeout, extra), state.args.workers)
     collected = {}
