@@ -1,4 +1,5 @@
 """Tests for kolla_ovs_doctor.remote."""
+import socket
 import time
 import types
 
@@ -58,6 +59,10 @@ def ssh_home(sshd, tmp_path, monkeypatch):
             f"  Port {sshd.port}\n  User tester\n{extra}")
 
     write_config()
+    # Paramiko asks DNS for this machine's name. Answer at once, and count the calls.
+    write_config.fqdn_calls = []
+    monkeypatch.setattr(socket, "getfqdn",
+                        lambda name="": write_config.fqdn_calls.append(name) or "localhost")
     monkeypatch.setenv("HOME", str(tmp_path))
     monkeypatch.delenv("SSH_AUTH_SOCK", raising=False)
     remote.close_clients()
@@ -99,6 +104,13 @@ def test_one_connection_per_host_and_reconnect(sshd, ssh_home):
     sshd.drop_connections()
     assert remote.run_ssh("box", None, 5, "echo back") == "back\n"
     assert sshd.accepted == before + 2
+
+
+def test_ssh_config_is_looked_up_once_per_host(sshd, ssh_home):
+    remote.run_ssh("box", None, 5, "true")
+    sshd.drop_connections()
+    remote.run_ssh("box", None, 5, "true")
+    assert len(ssh_home.fqdn_calls) == 1
 
 
 def test_unknown_host_key_is_refused(ssh_home, tmp_path):

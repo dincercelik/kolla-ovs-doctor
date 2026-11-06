@@ -1,5 +1,6 @@
 """Run scripts on the hosts over SSH with Paramiko, under one sudo per script."""
 import atexit
+import functools
 import getpass
 import os
 import re
@@ -38,11 +39,31 @@ class RemoteError(RuntimeError):
         self.returncode = returncode
 
 
+@functools.cache
+def ssh_config(path, stamp):
+    """Return the parsed ssh_config at path. stamp is (mtime, size), or None if it is missing."""
+    return paramiko.SSHConfig.from_path(path) if stamp else paramiko.SSHConfig()
+
+
+@functools.cache
+def ssh_config_entry(path, stamp, host):
+    """Return the ssh_config settings for host.
+
+    This is cached per host, because Paramiko looks up this machine's own name in DNS
+    for every IdentityFile line. With slow DNS that takes 5 seconds each time.
+    """
+    return ssh_config(path, stamp).lookup(host)
+
+
 def ssh_options(host, user):
     """Return the Paramiko connect options for host, from ~/.ssh/config and --ssh-user."""
     path = os.path.expanduser("~/.ssh/config")
-    config = paramiko.SSHConfig.from_path(path) if os.path.exists(path) else paramiko.SSHConfig()
-    found = config.lookup(host)
+    if os.path.exists(path):
+        info = os.stat(path)
+        stamp = (info.st_mtime_ns, info.st_size)
+    else:
+        stamp = None
+    found = ssh_config_entry(path, stamp, host)
     if "proxycommand" in found or "proxyjump" in found:
         raise RemoteError(f"ssh: {host} needs ProxyJump or ProxyCommand, and jump hosts are "
                           f"not supported", 255)
